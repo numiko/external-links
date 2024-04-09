@@ -3,6 +3,18 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "dist/external-links.umd.js",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/external-links.es.js",
+      "require": "./dist/external-links.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
