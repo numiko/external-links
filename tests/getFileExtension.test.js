@@ -16,43 +16,43 @@ beforeEach(() => {
 });
 
 describe('getFileExtension Function', () => {
-  test('returns the correct file extension', () => {
-    const url = new URL('https://example.com/document.pdf');
+  const setupTest = (urlString) => {
+    const url = new URL(urlString);
     const extension = getFileExtension(url);
+    return extension;
+  };
+
+  test('returns the correct file extension', () => {
+    const extension = setupTest('https://example.com/document.pdf');
     expect(extension).toBe('pdf');
   });
 
   test('returns the correct file extension when URL has parameters', () => {
-    const url = new URL('https://example.com/test.pdf?param=value');
-    const extension = getFileExtension(url);
+    const extension = setupTest('https://example.com/test.pdf?param=value');
     expect(extension).toBe('pdf');
   });
 
   test('returns an empty string when URL has no file extension', () => {
-    const url = new URL('https://example.com/document');
-    const extension = getFileExtension(url);
+    const extension = setupTest('https://example.com/document');
     expect(extension).toBe('');
   });
 
   test('returns the correct file extension when URL has a fragment identifier', () => {
-    const url = new URL('https://example.com/document.pdf#page=2');
-    const extension = getFileExtension(url);
+    const extension = setupTest('https://example.com/document.pdf#page=2');
     expect(extension).toBe('pdf');
   });
 
   test('returns the correct file extension when URL has multiple query parameters', () => {
-    const url = new URL(
+    const extension = setupTest(
       'https://example.com/document.pdf?param1=value1&param2=value2'
     );
-    const extension = getFileExtension(url);
     expect(extension).toBe('pdf');
   });
 
   test('returns the correct file extension when URL has a query parameter with a period', () => {
-    const url = new URL(
+    const extension = setupTest(
       'https://example.com/document.pdf?param=value.with.period'
     );
-    const extension = getFileExtension(url);
     expect(extension).toBe('pdf');
   });
 });
