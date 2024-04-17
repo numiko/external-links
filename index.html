@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test suite for External Links</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body
+    class="text-center flex flex-col items-center justify-center space-y-4 bg-slate-100 my-16"
+  >
+    <h1 class="text-2xl font-bold">Test suite for External Links</h1>
+
+    <p>Refresh to see test results</p>
+
+    <p>See dev tools to check</p>
+
+    <h2><span id="fail"></span> Failing Tests</h2>
+
+    <h2 class="text-xl font-bold">Links that should have the properties:</h2>
+
+    <ul>
+      <li>rel="noopener noreferrer"</li>
+      <li>target="_blank"</li>
+      <li>aria-label="Opens in a new tab"</li>
+      <li>class="external-link"</li>
+    </ul>
+
+    <div>
+      <h3 class="font-bold">External links</h3>
+
+      <a href="https://external.com">https://external.com</a>
+
+      <input type="checkbox" class="rel-prop" />
+      <input type="checkbox" class="target-prop" />
+      <input type="checkbox" class="aria-prop" />
+      <input type="checkbox" class="class-prop" />
+    </div>
+
+    <div>
+      <h3 class="font-bold">External PDF Links</h3>
+
+      <a href="https://external.com/test.pdf">https://external.com/test.pdf</a>
+      <input type="checkbox" class="rel-prop" />
+      <input type="checkbox" class="target-prop" />
+      <input type="checkbox" class="aria-prop" />
+      <input type="checkbox" class="class-prop" />
+    </div>
+
+    <h2 class="text-xl font-bold">
+      Links that should keep their existing attributes:
+    </h2>
+    <ul>
+      <li>rel="existing rel"</li>
+      <li>target="_self"</li>
+      <li>aria-label="Existing label"</li>
+      <li>class="external-link"</li>
+    </ul>
+
+    <div>
+      <h3 class="font-bold">External links with existing attributes</h3>
+
+      <a
+        href="https://external.com"
+        target="_self"
+        aria-label="existing label"
+        rel="existing rel"
+        class="existing-class"
+        >https://external.com</a
+      >
+      <input type="checkbox" class="rel-prop" />
+      <input type="checkbox" class="target-prop" />
+      <input type="checkbox" class="aria-prop" />
+      <input type="checkbox" class="class-prop" />
+    </div>
+
+    <div>
+      <h3 class="font-bold">PDF links with existing attributes</h3>
+
+      <a
+        href="https://example.com/test.pdf"
+        target="_self"
+        aria-label="existing label"
+        rel="existing rel"
+        class="existing-class"
+        >https://example.com/test.pdf</a
+      >
+      <input type="checkbox" class="rel-prop" />
+      <input type="checkbox" class="target-prop" />
+      <input type="checkbox" class="aria-prop" />
+      <input type="checkbox" class="class-prop" />
+    </div>
+
+    <h2 class="text-xl font-bold">Links that should have no properties</h2>
+
+    <div>
+      <h3 class="font-bold">Internal links</h3>
+      <a href="/internal">/internal</a>
+      <input type="checkbox" class="rel-prop" />
+      <input type="checkbox" class="target-prop" />
+      <input type="checkbox" class="aria-prop" />
+      <input type="checkbox" class="class-prop" />
+    </div>
+
+    <div>
+      <h3 class="font-bold">PDF links that match the current domain</h3>
+<a id="local" href="">http://localhost:5173/test.pdf</a>
+
+
+      <input type="checkbox" class="rel-prop" />
+      <input type="checkbox" class="target-prop" />
+      <input type="checkbox" class="aria-prop" />
+      <input type="checkbox" class="class-prop" />
+    </div>
+
+    <script>
+    console.log(window.location.origin)
+  document.getElementById(
+    'local'
+    ).href = `${window.location.origin}/test.pdf`;
+    </script>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

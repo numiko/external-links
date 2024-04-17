@@ -16,7 +16,7 @@
     }
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "npx vitest --run --reporter=json addAttributesToLinks.test.js > test-results.json & vite",
     "build": "npm run coverage && vite build",
     "preview": "vite preview",
     "test": "vitest",

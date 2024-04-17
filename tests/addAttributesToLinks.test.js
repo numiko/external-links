@@ -25,7 +25,7 @@ describe('addAttributesToLinks Function', () => {
     return tag;
   };
 
-  describe('external links', () => {
+  describe('External links', () => {
     const link = setupTest('<a href="https://external.com">External Link</a>');
 
     test('adds target attribute', () => {
@@ -70,9 +70,9 @@ describe('addAttributesToLinks Function', () => {
     });
   });
 
-  describe('external links with existing attributes', () => {
+  describe('External links with existing attributes', () => {
     const link = setupTest(
-      '<a href="https://external.com" target="_self" aria-label="Existing label" rel="existing rel">Link</a>'
+      '<a href="https://external.com" target="_self" aria-label="Existing label" rel="existing rel" class="existing-class">Link</a>'
     );
 
     test('does not change existing target attribute', () => {
@@ -85,12 +85,16 @@ describe('addAttributesToLinks Function', () => {
 
     test('does not change existing rel attribute', () => {
       expect(link.getAttribute('rel')).toBe('existing rel');
+    });
+
+    test('does not change class attribute', () => {
+      expect(link.classList.contains('existing-class')).toBe(true);
     });
   });
 
   describe('PDF links with existing attributes', () => {
     const link = setupTest(
-      '<a href="https://example.com/test.pdf" target="_self" aria-label="Existing label" rel="existing rel">Link</a>'
+      '<a href="https://example.com/test.pdf" target="_self" aria-label="Existing label" rel="existing rel" class="existing-class">Link</a>'
     );
 
     test('does not change existing target attribute', () => {
@@ -104,9 +108,13 @@ describe('addAttributesToLinks Function', () => {
     test('does not change existing rel attribute', () => {
       expect(link.getAttribute('rel')).toBe('existing rel');
     });
+
+    test('does not change class attribute', () => {
+      expect(link.classList.contains('existing-class')).toBe(true);
+    });
   });
 
-  describe('internal links', () => {
+  describe('Internal links', () => {
     const link = setupTest('<a href="/internal">Internal Link</a>');
 
     test('does not add target attribute', () => {

@@ -30,7 +30,7 @@ describe('matchDomain Function', () => {
   });
 
   test('returns false when domain does not match', () => {
-    const { matches } = setupTest('https://example.com', 'other.com');
+    const { matches } = setupTest('https://other.com', 'example.com');
     expect(matches).toBe(false);
   });
 
