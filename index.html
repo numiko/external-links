@@ -79,16 +79,14 @@
       <a id="local" href="">http://localhost:5173/test.pdf</a>
     </div>
 
-
-
     <script>
-    // Used to update href of current domain link
+      // Used to update href of current domain link
       document.getElementById(
         'local'
       ).href = `${window.location.origin}/test.pdf`;
     </script>
-    <script type='module'>
-    import './lib/external-links.js'
+    <script type="module">
+      import './lib/external-links.js';
     </script>
   </body>
 </html>

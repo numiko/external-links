@@ -7,7 +7,7 @@
  *
  * @example
  * To run tests: npm run test
- * To generate coverage: npm run coverage
+ * To generate coverage: npm run test:coverage
  */
 
 import { it, expect, describe, beforeEach } from 'vitest';
@@ -51,6 +51,7 @@ describe('addAttributesToLinks Function', () => {
     const link = setupTest(
       '<a href="https://external.com/test.pdf">PDF Link</a>'
     );
+
     it('adds target attribute', () => {
       expect(link.getAttribute('target')).toBe('_blank');
     });

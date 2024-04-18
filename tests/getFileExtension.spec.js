@@ -5,7 +5,7 @@
  *
  * @example
  * To run tests: npm run test
- * To generate coverage: npm run coverage
+ * To generate coverage: npm run test:coverage
  */
 
 import { it, expect, describe, beforeEach } from 'vitest';
