@@ -12,13 +12,9 @@
   >
     <h1 class="text-2xl font-bold">Test suite for External Links</h1>
 
-    <p>Refresh to see test results</p>
+    <p>See dev tools to check attributes</p>
 
-    <p>See dev tools to check</p>
-
-    <h2><span id="fail"></span> Failing Tests</h2>
-
-    <h2 class="text-xl font-bold">Links that should have the properties:</h2>
+    <h2 class="text-xl font-bold">Links that should have the attributes:</h2>
 
     <ul>
       <li>rel="noopener noreferrer"</li>
@@ -29,23 +25,12 @@
 
     <div>
       <h3 class="font-bold">External links</h3>
-
       <a href="https://external.com">https://external.com</a>
-
-      <input type="checkbox" class="rel-prop" />
-      <input type="checkbox" class="target-prop" />
-      <input type="checkbox" class="aria-prop" />
-      <input type="checkbox" class="class-prop" />
     </div>
 
     <div>
       <h3 class="font-bold">External PDF Links</h3>
-
       <a href="https://external.com/test.pdf">https://external.com/test.pdf</a>
-      <input type="checkbox" class="rel-prop" />
-      <input type="checkbox" class="target-prop" />
-      <input type="checkbox" class="aria-prop" />
-      <input type="checkbox" class="class-prop" />
     </div>
 
     <h2 class="text-xl font-bold">
@@ -60,7 +45,6 @@
 
     <div>
       <h3 class="font-bold">External links with existing attributes</h3>
-
       <a
         href="https://external.com"
         target="_self"
@@ -69,15 +53,10 @@
         class="existing-class"
         >https://external.com</a
       >
-      <input type="checkbox" class="rel-prop" />
-      <input type="checkbox" class="target-prop" />
-      <input type="checkbox" class="aria-prop" />
-      <input type="checkbox" class="class-prop" />
     </div>
 
     <div>
       <h3 class="font-bold">PDF links with existing attributes</h3>
-
       <a
         href="https://example.com/test.pdf"
         target="_self"
@@ -86,10 +65,6 @@
         class="existing-class"
         >https://example.com/test.pdf</a
       >
-      <input type="checkbox" class="rel-prop" />
-      <input type="checkbox" class="target-prop" />
-      <input type="checkbox" class="aria-prop" />
-      <input type="checkbox" class="class-prop" />
     </div>
 
     <h2 class="text-xl font-bold">Links that should have no properties</h2>
@@ -97,28 +72,23 @@
     <div>
       <h3 class="font-bold">Internal links</h3>
       <a href="/internal">/internal</a>
-      <input type="checkbox" class="rel-prop" />
-      <input type="checkbox" class="target-prop" />
-      <input type="checkbox" class="aria-prop" />
-      <input type="checkbox" class="class-prop" />
     </div>
 
     <div>
       <h3 class="font-bold">PDF links that match the current domain</h3>
-<a id="local" href="">http://localhost:5173/test.pdf</a>
-
-
-      <input type="checkbox" class="rel-prop" />
-      <input type="checkbox" class="target-prop" />
-      <input type="checkbox" class="aria-prop" />
-      <input type="checkbox" class="class-prop" />
+      <a id="local" href="">http://localhost:5173/test.pdf</a>
     </div>
 
+
+
     <script>
-  document.getElementById(
-    'local'
-    ).href = `${window.location.origin}/test.pdf`;
+    // Used to update href of current domain link
+      document.getElementById(
+        'local'
+      ).href = `${window.location.origin}/test.pdf`;
     </script>
-    <script type="module" src="./src/main.js"></script>
+    <script type='module'>
+    import './lib/external-links.js'
+    </script>
   </body>
 </html>

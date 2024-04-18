@@ -8,7 +8,7 @@
  * To generate coverage: npm run coverage
  */
 
-import { test, expect, describe, beforeEach } from 'vitest';
+import { it, expect, describe, beforeEach } from 'vitest';
 import { matchDomain } from '../lib/external-links.js';
 
 beforeEach(() => {
@@ -24,27 +24,27 @@ describe('matchDomain Function', () => {
     return { url, matches };
   };
 
-  test('returns true when domain matches', () => {
+  it('returns true when domain matches', () => {
     const { matches } = setupTest('https://example.com', 'example.com');
     expect(matches).toBe(true);
   });
 
-  test('returns false when domain does not match', () => {
+  it('returns false when domain does not match', () => {
     const { matches } = setupTest('https://other.com', 'example.com');
     expect(matches).toBe(false);
   });
 
-  test('returns true when domain matches case-insensitively', () => {
+  it('returns true when domain matches case-insensitively', () => {
     const { matches } = setupTest('https://EXAMPLE.com', 'example.com');
     expect(matches).toBe(true);
   });
 
-  test('returns true when domain matches the current host', () => {
+  it('returns true when domain matches the current host', () => {
     const { matches } = setupTest('https://example.com');
     expect(matches).toBe(true);
   });
 
-  test('returns false when domain is a substring of another domain', () => {
+  it('returns false when domain is a substring of another domain', () => {
     const { matches } = setupTest('https://otherexample.com', 'example.com');
     expect(matches).toBe(false);
   });

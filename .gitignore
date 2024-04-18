@@ -24,4 +24,3 @@ dist-ssr
 
 package-lock.json
 coverage/
-test-results.json

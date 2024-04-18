@@ -10,7 +10,7 @@
  * To generate coverage: npm run coverage
  */
 
-import { test, expect, describe, beforeEach } from 'vitest';
+import { it, expect, describe, beforeEach } from 'vitest';
 import { addAttributesToLinks } from '../lib/external-links.js';
 
 beforeEach(() => {
@@ -28,21 +28,21 @@ describe('addAttributesToLinks Function', () => {
   describe('External links', () => {
     const link = setupTest('<a href="https://external.com">External Link</a>');
 
-    test('adds target attribute', () => {
+    it('adds target attribute', () => {
       expect(link.getAttribute('target')).toBe('_blank');
     });
 
-    test('adds aria-label attribute', () => {
+    it('adds aria-label attribute', () => {
       expect(link.getAttribute('aria-label')).toBe(
         'External Link (Opens in new window)'
       );
     });
 
-    test('adds rel attribute', () => {
+    it('adds rel attribute', () => {
       expect(link.getAttribute('rel')).toBe('noopener noreferrer');
     });
 
-    test('adds external-link class', () => {
+    it('adds external-link class', () => {
       expect(link.classList.contains('external-link')).toBe(true);
     });
   });
@@ -51,21 +51,21 @@ describe('addAttributesToLinks Function', () => {
     const link = setupTest(
       '<a href="https://external.com/test.pdf">PDF Link</a>'
     );
-    test('adds target attribute', () => {
+    it('adds target attribute', () => {
       expect(link.getAttribute('target')).toBe('_blank');
     });
 
-    test('adds aria-label attribute', () => {
+    it('adds aria-label attribute', () => {
       expect(link.getAttribute('aria-label')).toBe(
         'PDF Link (Opens in new window)'
       );
     });
 
-    test('adds rel attribute', () => {
+    it('adds rel attribute', () => {
       expect(link.getAttribute('rel')).toBe('noopener noreferrer');
     });
 
-    test('adds external-link class', () => {
+    it('adds external-link class', () => {
       expect(link.classList.contains('external-link')).toBe(true);
     });
   });
@@ -75,19 +75,19 @@ describe('addAttributesToLinks Function', () => {
       '<a href="https://external.com" target="_self" aria-label="Existing label" rel="existing rel" class="existing-class">Link</a>'
     );
 
-    test('does not change existing target attribute', () => {
+    it('does not change existing target attribute', () => {
       expect(link.getAttribute('target')).toBe('_self');
     });
 
-    test('does not change existing aria-label attribute', () => {
+    it('does not change existing aria-label attribute', () => {
       expect(link.getAttribute('aria-label')).toBe('Existing label');
     });
 
-    test('does not change existing rel attribute', () => {
+    it('does not change existing rel attribute', () => {
       expect(link.getAttribute('rel')).toBe('existing rel');
     });
 
-    test('does not change class attribute', () => {
+    it('does not change class attribute', () => {
       expect(link.classList.contains('existing-class')).toBe(true);
     });
   });
@@ -97,19 +97,19 @@ describe('addAttributesToLinks Function', () => {
       '<a href="https://example.com/test.pdf" target="_self" aria-label="Existing label" rel="existing rel" class="existing-class">Link</a>'
     );
 
-    test('does not change existing target attribute', () => {
+    it('does not change existing target attribute', () => {
       expect(link.getAttribute('target')).toBe('_self');
     });
 
-    test('does not change existing aria-label attribute', () => {
+    it('does not change existing aria-label attribute', () => {
       expect(link.getAttribute('aria-label')).toBe('Existing label');
     });
 
-    test('does not change existing rel attribute', () => {
+    it('does not change existing rel attribute', () => {
       expect(link.getAttribute('rel')).toBe('existing rel');
     });
 
-    test('does not change class attribute', () => {
+    it('does not change class attribute', () => {
       expect(link.classList.contains('existing-class')).toBe(true);
     });
   });
@@ -117,19 +117,19 @@ describe('addAttributesToLinks Function', () => {
   describe('Internal links', () => {
     const link = setupTest('<a href="/internal">Internal Link</a>');
 
-    test('does not add target attribute', () => {
+    it('does not add target attribute', () => {
       expect(link.getAttribute('target')).toBe(null);
     });
 
-    test('does not add aria-label attribute', () => {
+    it('does not add aria-label attribute', () => {
       expect(link.getAttribute('aria-label')).toBe(null);
     });
 
-    test('does not add rel attribute', () => {
+    it('does not add rel attribute', () => {
       expect(link.getAttribute('rel')).toBe(null);
     });
 
-    test('does not add external-link class', () => {
+    it('does not add external-link class', () => {
       expect(link.classList.contains('external-link')).toBe(false);
     });
   });
@@ -139,19 +139,19 @@ describe('addAttributesToLinks Function', () => {
       '<a href="https://example.com/test.pdf">PDF Link</a>'
     );
 
-    test('does not add target attribute', () => {
+    it('does not add target attribute', () => {
       expect(link.getAttribute('target')).toBe(null);
     });
 
-    test('does not add aria-label attribute', () => {
+    it('does not add aria-label attribute', () => {
       expect(link.getAttribute('aria-label')).toBe(null);
     });
 
-    test('does not add rel attribute', () => {
+    it('does not add rel attribute', () => {
       expect(link.getAttribute('rel')).toBe(null);
     });
 
-    test('does not add external-link class', () => {
+    it('does not add external-link class', () => {
       expect(link.classList.contains('external-link')).toBe(false);
     });
   });

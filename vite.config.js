@@ -11,9 +11,10 @@ export default defineConfig({
     },
   },
   test: {
-    setupFiles: [path.resolve(__dirname, 'src/setup.js')],
+    setupFiles: [path.resolve(__dirname, './test-setup.js')],
     coverage: {
       provider: 'v8',
     },
+    reporters:['verbose']
   },
 })

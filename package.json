@@ -8,10 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "test:coverage": "vitest --coverage",
-    "test:results": "vitest --run --reporter=json addAttributesToLinks.test.js > test-results.json"
+    "test:coverage": "vitest --coverage"
   },
-  "main": "dist/external-links.es.js",
   "files": [
     "dist",
     "package.json",
@@ -23,7 +21,6 @@
       "require": "./dist/external-links.umd.js"
     }
   },
-
   "devDependencies": {
     "@vitest/coverage-v8": "^1.4.0",
     "happy-dom": "^14.7.1",

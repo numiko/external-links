@@ -8,7 +8,7 @@
  * To generate coverage: npm run coverage
  */
 
-import { test, expect, describe, beforeEach } from 'vitest';
+import { it, expect, describe, beforeEach } from 'vitest';
 import { getFileExtension } from '../lib/external-links.js';
 
 beforeEach(() => {
@@ -22,34 +22,34 @@ describe('getFileExtension Function', () => {
     return extension;
   };
 
-  test('returns the correct file extension', () => {
+  it('returns the correct file extension', () => {
     const extension = setupTest('https://example.com/document.pdf');
     expect(extension).toBe('pdf');
   });
 
-  test('returns the correct file extension when URL has parameters', () => {
+  it('returns the correct file extension when URL has parameters', () => {
     const extension = setupTest('https://example.com/test.pdf?param=value');
     expect(extension).toBe('pdf');
   });
 
-  test('returns an empty string when URL has no file extension', () => {
+  it('returns an empty string when URL has no file extension', () => {
     const extension = setupTest('https://example.com/document');
     expect(extension).toBe('');
   });
 
-  test('returns the correct file extension when URL has a fragment identifier', () => {
+  it('returns the correct file extension when URL has a fragment identifier', () => {
     const extension = setupTest('https://example.com/document.pdf#page=2');
     expect(extension).toBe('pdf');
   });
 
-  test('returns the correct file extension when URL has multiple query parameters', () => {
+  it('returns the correct file extension when URL has multiple query parameters', () => {
     const extension = setupTest(
       'https://example.com/document.pdf?param1=value1&param2=value2'
     );
     expect(extension).toBe('pdf');
   });
 
-  test('returns the correct file extension when URL has a query parameter with a period', () => {
+  it('returns the correct file extension when URL has a query parameter with a period', () => {
     const extension = setupTest(
       'https://example.com/document.pdf?param=value.with.period'
     );

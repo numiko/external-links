@@ -8,7 +8,7 @@
  * To generate coverage: npm run coverage
  */
 
-import { test, expect, describe, beforeEach } from 'vitest';
+import { it, expect, describe, beforeEach } from 'vitest';
 import { isExternalLink } from '../lib/external-links.js';
 
 beforeEach(() => {
@@ -23,28 +23,28 @@ describe('isExternalLink Function', () => {
     return isExternal;
   };
 
-  test('returns true for external links', () => {
+  it('returns true for external links', () => {
     const isExternal = setupTest('https://external.com');
     expect(isExternal).toBe(true);
   });
 
-  test('returns false for internal links', () => {
+  it('returns false for internal links', () => {
     const isExternal = setupTest('/internal');
     expect(isExternal).toBe(false);
   });
 
-  test('returns false for links with non-http protocols', () => {
+  it('returns false for links with non-http protocols', () => {
     const isExternal = setupTest('ftp://external.com');
     expect(isExternal).toBe(false);
   });
 
-  test('returns false for links with the same hostname as the current location', () => {
+  it('returns false for links with the same hostname as the current location', () => {
     const currentDomain = window.location.hostname;
     const isExternal = setupTest(`https://${currentDomain}`);
     expect(isExternal).toBe(false);
   });
 
-  test('returns false for links with an empty hostname', () => {
+  it('returns false for links with an empty hostname', () => {
     const isExternal = setupTest('');
     expect(isExternal).toBe(false);
   });
