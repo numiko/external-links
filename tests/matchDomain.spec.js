@@ -48,4 +48,9 @@ describe('matchDomain Function', () => {
     const { matches } = setupTest('https://otherexample.com', 'example.com');
     expect(matches).toBe(false);
   });
+
+  it('returns true when domain is a subdomain of the specified domain', () => {
+  const { matches } = setupTest('https://sub.example.com', 'example.com');
+  expect(matches).toBe(true);
+});
 });
