@@ -52,5 +52,30 @@ describe('matchDomain Function', () => {
   it('returns true when domain is a subdomain of the specified domain', () => {
   const { matches } = setupTest('https://sub.example.com', 'example.com');
   expect(matches).toBe(true);
-});
+  });
+
+  it('returns true when URL has parameters and matches the specified domain', () => {
+  const { matches } = setupTest('https://example.com?page=1', 'example.com');
+  expect(matches).toBe(true);
+  });
+
+  it('returns true when URL has a fragment and matches the specified domain', () => {
+    const { matches } = setupTest('https://example.com#section', 'example.com');
+    expect(matches).toBe(true);
+  });
+
+  it('returns true when URL has a different protocol', () => {
+    const { matches } = setupTest('ftp://example.com', 'example.com');
+    expect(matches).toBe(true);
+  });
+
+  it('returns false when URL is relative', () => {
+    const { matches } = setupTest('/page', 'example.com');
+    expect(matches).toBe(false);
+  });
+
+  it('returns false when URL is an anchor id', () => {
+    const { matches } = setupTest('#section', 'example.com');
+    expect(matches).toBe(false);
+  });
 });
