@@ -1,5 +1,4 @@
 import '../lib/external-links.js'
-import { matchDomain } from '../lib/external-links.js';
 
 /**
  * This file is used to run the package locally for development and testing purposes.

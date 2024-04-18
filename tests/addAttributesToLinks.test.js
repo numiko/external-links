@@ -3,7 +3,7 @@
  *
  * Uses getFileExtension, isExternalLink, and matchDomain functions in code
  *
- * @see {@link ../setup.js} for test configuration
+ * @see {@link ../src/setup.js} for test configuration
  *
  * @example
  * To run tests: npm run test

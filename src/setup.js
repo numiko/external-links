@@ -1,13 +1,12 @@
-console.log('Starting setup...');
+import { Window } from 'happy-dom';
 
-import { JSDOM } from 'jsdom';
+// Initalise Happy DOM
+// Tests and coe that use window.location must use the url below
+const window = new Window({url:'https://example.com'});
+const document = window.document;
+const location = window.location
 
-const dom = new JSDOM('<!doctype html><html><body></body></html>', {
-  // Tests and code that use window.location must use this url
-  url: 'https://example.com',
-});
-global.document = dom.window.document;
-global.location = dom.window.location;
-global.window = dom.window;
-
-console.log('Setup complete');
+// Make window, document, and location global
+global.document = document;
+global.window = window;
+global.location = location

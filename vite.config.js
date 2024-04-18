@@ -11,7 +11,7 @@ export default defineConfig({
     },
   },
   test: {
-    setupFiles: [path.resolve(__dirname, 'setup.js')],
+    setupFiles: [path.resolve(__dirname, 'src/setup.js')],
     coverage: {
       provider: 'v8',
     },
