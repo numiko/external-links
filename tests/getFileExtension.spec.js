@@ -11,16 +11,9 @@
 import { it, expect, describe, beforeEach } from 'vitest';
 import { getFileExtension } from '../lib/external-links.js';
 
-beforeEach(() => {
-  document.body.innerHTML = '';
-});
-
 describe('getFileExtension Function', () => {
   const setupTest = (href) => {
-    const link = document.createElement("a");
-    link.href = href;
-    const pathname = link.pathname;
-    const extension = getFileExtension(pathname);
+    const extension = getFileExtension(href);
     return extension;
   };
 
