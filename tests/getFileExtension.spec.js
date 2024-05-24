@@ -16,9 +16,11 @@ beforeEach(() => {
 });
 
 describe('getFileExtension Function', () => {
-  const setupTest = (urlString) => {
-    const url = new URL(urlString);
-    const extension = getFileExtension(url);
+  const setupTest = (href) => {
+    const link = document.createElement("a");
+    link.href = href;
+    const pathname = link.pathname;
+    const extension = getFileExtension(pathname);
     return extension;
   };
 
