@@ -9,5 +9,12 @@ export default defineConfig({
       name: 'external-links',
       fileName: (format) => `external-links.${format}.js`
     },
-  }
+  },
+  test: {
+    setupFiles: [path.resolve(__dirname, './test-setup.js')],
+    coverage: {
+      provider: 'v8',
+    },
+    reporters:['verbose']
+  },
 })
