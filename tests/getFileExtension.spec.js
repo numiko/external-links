@@ -1,7 +1,7 @@
 /**
  * getFileExtension Tests
  *
- * @see {@link ../src/setup.js} for test configuration
+ * @see {@link ../test-setup.js} for test configuration
  *
  * @example
  * To run tests: npm run test

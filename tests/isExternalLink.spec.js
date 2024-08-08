@@ -1,7 +1,7 @@
 /**
  * isExternalLink Function Tests
  *
- * @see {@link ../src/setup.js} for test configuration
+ * @see {@link ../test-setup.js} for test configuration
  *
  * @example
  * To run tests: npm run test
@@ -33,6 +33,11 @@ describe('isExternalLink Function', () => {
 
   it('returns false for internal links', () => {
     const isExternal = setupTest('/internal');
+    expect(isExternal).toBe(false);
+  });
+
+  it('returns false for internal links', () => {
+    const isExternal = setupTest('https://example.com');
     expect(isExternal).toBe(false);
   });
 
