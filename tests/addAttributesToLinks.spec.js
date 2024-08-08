@@ -23,7 +23,7 @@ describe('addAttributesToLinks Function', () => {
   const setupTest = (html) => {
     document.body.innerHTML = html;
     const tag = document.querySelector('a');
-    externalLinks = new ExternalLinks({ openPDFsInNewTab: true });
+    externalLinks = new ExternalLinks({ openPDFNewTab: true });
     externalLinks.addAttributesToLinks();
     return tag;
   };

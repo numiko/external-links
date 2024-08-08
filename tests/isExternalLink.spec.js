@@ -21,7 +21,7 @@ describe('isExternalLink Function', () => {
   const setupTest = (urlString) => {
     document.body.innerHTML = `<!DOCTYPE html><a href="${urlString}">Link</a>`;
     const link = document.querySelector('a');
-    externalLinks = new ExternalLinks({ openPDFsInNewTab: true });
+    externalLinks = new ExternalLinks({ openPDFNewTab: true });
     const isExternal = externalLinks.isExternalLink(link);
     return isExternal;
   };

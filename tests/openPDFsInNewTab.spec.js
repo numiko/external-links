@@ -1,5 +1,5 @@
 /**
- * openPDFsInNewTab Option Tests
+ * openPDFNewTab Option Tests
  *
  * @see {@link ../test-setup.js} for test configuration
  *
@@ -17,7 +17,7 @@ beforeEach(() => {
   document.body.innerHTML = '';
 });
 
-describe('option: openPDFsInNewTab', () => {
+describe('option: openPDFNewTab', () => {
   const setupTest = (options, html) => {
     document.body.innerHTML = html;
     const tag = document.querySelector('a');
@@ -53,7 +53,7 @@ describe('option: openPDFsInNewTab', () => {
 
   describe('option passed true', () => {
     const link = setupTest(
-      { openPDFsInNewTab: true },
+      { openPDFNewTab: true },
       '<a href="https://example.com/test.pdf">PDF Link</a>'
     );
 
@@ -78,7 +78,7 @@ describe('option: openPDFsInNewTab', () => {
 
   describe('option passed false', () => {
     const link = setupTest(
-      { openPDFsInNewTab: false },
+      { openPDFNewTab: false },
       '<a href="https://example.com/test.pdf">PDF Link</a>'
     );
 

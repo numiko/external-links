@@ -15,7 +15,7 @@ let externalLinks;
 
 describe('getFileExtension Function', () => {
   const setupTest = (href) => {
-    externalLinks = new ExternalLinks({ openPDFsInNewTab: true });
+    externalLinks = new ExternalLinks({ openPDFNewTab: true });
     const extension = externalLinks.getFileExtension(href);
     return extension;
   };
