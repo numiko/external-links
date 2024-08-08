@@ -11,7 +11,9 @@
  */
 
 import { it, expect, describe, beforeEach } from 'vitest';
-import { addAttributesToLinks } from '../lib/external-links.js';
+import ExternalLinks from '../lib/external-links.js';
+
+let externalLinks;
 
 beforeEach(() => {
   document.body.innerHTML = '';
@@ -21,7 +23,8 @@ describe('addAttributesToLinks Function', () => {
   const setupTest = (html) => {
     document.body.innerHTML = html;
     const tag = document.querySelector('a');
-    addAttributesToLinks();
+    externalLinks = new ExternalLinks({ openPDFsInNewTab: true });
+    externalLinks.addAttributesToLinks();
     return tag;
   };
 

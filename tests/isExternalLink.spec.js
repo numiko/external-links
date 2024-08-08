@@ -9,7 +9,9 @@
  */
 
 import { it, expect, describe, beforeEach } from 'vitest';
-import { isExternalLink } from '../lib/external-links.js';
+import ExternalLinks from '../lib/external-links.js';
+
+let externalLinks;
 
 beforeEach(() => {
   document.body.innerHTML = '';
@@ -19,7 +21,8 @@ describe('isExternalLink Function', () => {
   const setupTest = (urlString) => {
     document.body.innerHTML = `<!DOCTYPE html><a href="${urlString}">Link</a>`;
     const link = document.querySelector('a');
-    const isExternal = isExternalLink(link);
+    externalLinks = new ExternalLinks({ openPDFsInNewTab: true });
+    const isExternal = externalLinks.isExternalLink(link);
     return isExternal;
   };
 
