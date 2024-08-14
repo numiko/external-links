@@ -156,4 +156,18 @@ describe('addAttributesToLinks Function', () => {
       expect(link.classList.contains('external-link')).toBe(false);
     });
   });
+
+  describe('Aria-label attribute', () => {
+    it('does not include HTML comments in aria-label', () => {
+      const link = setupTest(`
+        <a href="https://external.com">
+          <span></span>
+          <img src="image.jpg" alt="Image description" />
+          <!-- comment --> Link with comment <!-- comment -->
+        </a>
+      `);
+      expect(link.getAttribute('aria-label')).toBe('Link with comment (Opens in new window)');
+    });
+  });
+
 });
