@@ -1,4 +1,4 @@
-class s {
+class o {
   constructor(t = {}) {
     this.options = {
       openPDFNewTab: !0,
@@ -7,8 +7,8 @@ class s {
   }
   addAttributesToLinks() {
     for (const t of this.links) {
-      const e = t.getAttribute("href"), n = this.getFileExtension(e) === "pdf";
-      (this.isExternalLink(t) && !this.matchDomain(e) || n && this.options.openPDFNewTab) && (t.hasAttribute("target") || t.setAttribute("target", "_blank"), t.hasAttribute("aria-label") || t.setAttribute(
+      const e = t.getAttribute("href"), s = this.getFileExtension(e) === "pdf";
+      (this.isExternalLink(t) && !this.matchDomain(e) || s && this.options.openPDFNewTab) && (t.hasAttribute("target") || t.setAttribute("target", "_blank"), t.hasAttribute("aria-label") || t.setAttribute(
         "aria-label",
         `${t.innerText.trim()} (Opens in new window)`
       ), t.hasAttribute("rel") || t.setAttribute("rel", "noopener noreferrer"), t.classList.add("external-link"));
@@ -44,23 +44,15 @@ class s {
    * @returns {Boolean} - `true` if the URL's domain matches the given domain, `false` otherwise
    */
   matchDomain(t, e = window.location.host) {
-    let n;
+    let s;
     try {
-      n = new URL(t).host;
+      s = new URL(t).host;
     } catch {
       return !1;
     }
-    return n.toLowerCase() === e.toLowerCase() || n.toLowerCase().endsWith("." + e.toLowerCase());
-  }
-  /**
-   * Initialize the ExternalLinks functionality
-   * @param {Object} options - Configuration options
-   * @returns {ExternalLinks} - Instance of ExternalLinks
-   */
-  static init(t = {}) {
-    return new s(t);
+    return s.toLowerCase() === e.toLowerCase() || s.toLowerCase().endsWith("." + e.toLowerCase());
   }
 }
 export {
-  s as default
+  o as default
 };
