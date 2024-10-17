@@ -9,7 +9,7 @@
  */
 
 import { it, expect, describe, beforeEach } from 'vitest';
-import ExternalLinks from '../lib/external-links.js';
+import { ExternalLinks } from '../lib/external-links.js';
 
 let externalLinks;
 
@@ -22,7 +22,7 @@ describe('matchDomain Function', () => {
     document.body.innerHTML = `<!DOCTYPE html><a href="${innerHTML}">Link</a>`;
     const link = document.querySelector('a');
     const url = link.getAttribute('href');
-    externalLinks = new ExternalLinks({ openPDFNewTab: true });
+    externalLinks = new ExternalLinks();
     const matches = externalLinks.matchDomain(url, domain);
     return { url, matches };
   };

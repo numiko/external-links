@@ -9,13 +9,13 @@
  */
 
 import { it, expect, describe, beforeEach } from 'vitest';
-import ExternalLinks from '../lib/external-links.js';
+import { ExternalLinks } from '../lib/external-links.js';
 
 let externalLinks;
 
 describe('getFileExtension Function', () => {
   const setupTest = (href) => {
-    externalLinks = new ExternalLinks({ openPDFNewTab: true });
+    externalLinks = new ExternalLinks();
     const extension = externalLinks.getFileExtension(href);
     return extension;
   };

@@ -9,7 +9,7 @@
  */
 
 import { beforeEach, describe, expect, it } from "vitest";
-import ExternalLinks from "../lib/external-links";
+import { ExternalLinks } from "../lib/external-links.js";
 
 let externalLinks;
 
@@ -20,10 +20,9 @@ beforeEach(() => {
 describe('option: openPDFNewTab', () => {
   const setupTest = (options, html) => {
     document.body.innerHTML = html;
-    const tag = document.querySelector('a');
-    externalLinks = new ExternalLinks(options);
-    externalLinks.addAttributesToLinks();
-    return tag;
+    const tags = document.querySelectorAll('a');
+    externalLinks = new ExternalLinks(tags, options);
+    return tags[0];
   };
 
   describe('default: true', () => {
