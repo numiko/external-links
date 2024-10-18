@@ -1,8 +1,10 @@
 // vite.config.js
-import { defineConfig } from 'vite'
-import path from 'path'
+import { defineConfig } from 'vite';
+import path from 'path';
+import eslint from 'vite-plugin-eslint';
 
 export default defineConfig({
+  plugins: [eslint()],
   build: {
     lib: {
       entry: path.resolve(__dirname, 'lib/external-links.js'),
@@ -17,4 +19,4 @@ export default defineConfig({
     },
     reporters:['verbose']
   },
-})
+});
