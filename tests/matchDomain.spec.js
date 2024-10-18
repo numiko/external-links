@@ -1,7 +1,7 @@
 /**
  * matchDomain Function Tests
  *
- * @see {@link ../src/setup.js} for test configuration
+ * @see {@link ../test-setup.js} for test configuration
  *
  * @example
  * To run tests: npm run test
@@ -9,7 +9,9 @@
  */
 
 import { it, expect, describe, beforeEach } from 'vitest';
-import { matchDomain } from '../lib/external-links.js';
+import { ExternalLinks } from '../lib/external-links.js';
+
+let externalLinks;
 
 beforeEach(() => {
   document.body.innerHTML = '';
@@ -20,7 +22,8 @@ describe('matchDomain Function', () => {
     document.body.innerHTML = `<!DOCTYPE html><a href="${innerHTML}">Link</a>`;
     const link = document.querySelector('a');
     const url = link.getAttribute('href');
-    const matches = matchDomain(url, domain);
+    externalLinks = new ExternalLinks();
+    const matches = externalLinks.matchDomain(url, domain);
     return { url, matches };
   };
 

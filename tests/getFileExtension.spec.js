@@ -1,7 +1,7 @@
 /**
  * getFileExtension Tests
  *
- * @see {@link ../src/setup.js} for test configuration
+ * @see {@link ../test-setup.js} for test configuration
  *
  * @example
  * To run tests: npm run test
@@ -9,11 +9,14 @@
  */
 
 import { it, expect, describe, beforeEach } from 'vitest';
-import { getFileExtension } from '../lib/external-links.js';
+import { ExternalLinks } from '../lib/external-links.js';
+
+let externalLinks;
 
 describe('getFileExtension Function', () => {
   const setupTest = (href) => {
-    const extension = getFileExtension(href);
+    externalLinks = new ExternalLinks();
+    const extension = externalLinks.getFileExtension(href);
     return extension;
   };
 

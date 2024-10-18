@@ -1,7 +1,7 @@
 /**
  * isExternalLink Function Tests
  *
- * @see {@link ../src/setup.js} for test configuration
+ * @see {@link ../test-setup.js} for test configuration
  *
  * @example
  * To run tests: npm run test
@@ -9,7 +9,9 @@
  */
 
 import { it, expect, describe, beforeEach } from 'vitest';
-import { isExternalLink } from '../lib/external-links.js';
+import { ExternalLinks } from '../lib/external-links.js';
+
+let externalLinks;
 
 beforeEach(() => {
   document.body.innerHTML = '';
@@ -19,7 +21,8 @@ describe('isExternalLink Function', () => {
   const setupTest = (urlString) => {
     document.body.innerHTML = `<!DOCTYPE html><a href="${urlString}">Link</a>`;
     const link = document.querySelector('a');
-    const isExternal = isExternalLink(link);
+    externalLinks = new ExternalLinks();
+    const isExternal = externalLinks.isExternalLink(link);
     return isExternal;
   };
 
@@ -30,6 +33,11 @@ describe('isExternalLink Function', () => {
 
   it('returns false for internal links', () => {
     const isExternal = setupTest('/internal');
+    expect(isExternal).toBe(false);
+  });
+
+  it('returns false for internal links', () => {
+    const isExternal = setupTest('https://example.com');
     expect(isExternal).toBe(false);
   });
 
