@@ -143,11 +143,11 @@ describe('addAttributesToLinks Function', () => {
     );
 
     it('does add target attribute', () => {
-      expect(link.getAttribute('target')).toBe("_blank");
+      expect(link.getAttribute('target')).toBe('_blank');
     });
 
     it('does add aria-label attribute', () => {
-      expect(link.getAttribute('aria-label')).toBe("PDF Link (Opens in new window)");
+      expect(link.getAttribute('aria-label')).toBe('PDF Link (Opens in new window)');
     });
 
     it('does add rel attribute', () => {

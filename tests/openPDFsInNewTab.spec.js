@@ -8,9 +8,10 @@
  * To generate coverage: npm run test:coverage
  */
 
-import { beforeEach, describe, expect, it } from "vitest";
-import { ExternalLinks } from "../lib/external-links.js";
+import { beforeEach, describe, expect, it } from 'vitest';
+import { ExternalLinks } from '../lib/external-links.js';
 
+// eslint-disable-next-line no-unused-vars
 let externalLinks;
 
 beforeEach(() => {
