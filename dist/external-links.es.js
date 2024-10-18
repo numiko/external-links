@@ -1,14 +1,19 @@
-class o {
-  constructor(t = {}) {
+class r {
+  constructor(e = [], t = {}) {
     this.options = {
       openPDFNewTab: !0,
       ...t
-    }, this.links = document.links, this.addAttributesToLinks();
+    }, this.links = e, this.addAttributesToLinks(this.links);
   }
-  addAttributesToLinks() {
-    for (const t of this.links) {
-      const e = t.getAttribute("href"), s = this.getFileExtension(e) === "pdf";
-      (this.isExternalLink(t) && !this.matchDomain(e) || s && this.options.openPDFNewTab) && (t.hasAttribute("target") || t.setAttribute("target", "_blank"), t.hasAttribute("aria-label") || t.setAttribute(
+  /**
+   * Add attributes to links
+   * @param {NodeList|Array} links - The links to process
+   * @returns {void}
+   */
+  addAttributesToLinks(e) {
+    for (const t of e) {
+      const s = t.getAttribute("href"), n = this.getFileExtension(s) === "pdf";
+      (this.isExternalLink(t) && !this.matchDomain(s) || n && this.options.openPDFNewTab) && (t.hasAttribute("target") || t.setAttribute("target", "_blank"), t.hasAttribute("aria-label") || t.setAttribute(
         "aria-label",
         `${t.innerText.trim()} (Opens in new window)`
       ), t.hasAttribute("rel") || t.setAttribute("rel", "noopener noreferrer"), t.classList.add("external-link"));
@@ -20,22 +25,22 @@ class o {
    * @param {String} url - Usually the href of a link
    * @returns {String}
    */
-  getFileExtension(t) {
-    let e;
+  getFileExtension(e) {
+    let t;
     try {
-      e = new URL(t).pathname;
+      t = new URL(e).pathname;
     } catch {
-      e = t;
+      t = e;
     }
-    return e.slice((e.lastIndexOf(".") - 1 >>> 0) + 2);
+    return t.slice((t.lastIndexOf(".") - 1 >>> 0) + 2);
   }
   /**
   * Test whether a link is external
   * @param {HTML element} link
   * @returns {Boolean}
   */
-  isExternalLink(t) {
-    return (t.protocol === "https:" || t.protocol === "http:") && location.hostname !== t.hostname && t.hostname.length && t.hostname.slice(0, 1) !== "/";
+  isExternalLink(e) {
+    return (e.protocol === "https:" || e.protocol === "http:") && location.hostname !== e.hostname && e.hostname.length && e.hostname.slice(0, 1) !== "/";
   }
   /**
    * Test whether a URL matches a given domain
@@ -43,16 +48,16 @@ class o {
    * @param {String} [domain=window.location.host] - The domain to match against. Defaults to the current host.
    * @returns {Boolean} - `true` if the URL's domain matches the given domain, `false` otherwise
    */
-  matchDomain(t, e = window.location.host) {
+  matchDomain(e, t = window.location.host) {
     let s;
     try {
-      s = new URL(t).host;
+      s = new URL(e).host;
     } catch {
       return !1;
     }
-    return s.toLowerCase() === e.toLowerCase() || s.toLowerCase().endsWith("." + e.toLowerCase());
+    return s.toLowerCase() === t.toLowerCase() || s.toLowerCase().endsWith("." + t.toLowerCase());
   }
 }
 export {
-  o as default
+  r as ExternalLinks
 };
