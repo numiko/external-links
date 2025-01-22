@@ -20,3 +20,5 @@ This function checks if a given link is external. It takes an HTML link element 
 
 `matchDomain(url, domain)`
 This function checks if the domain of a given URL matches a specified domain. It takes two arguments: a URL string and an optional domain string. If no domain is provided, it defaults to the current host. The function returns `true` if the URL's domain matches the given domain (case-insensitive), and `false` otherwise. It also considers subdomains as a match (e.g., `www.example.com` matches `example.com`).
+
+Test comment
