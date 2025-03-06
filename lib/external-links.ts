@@ -60,8 +60,8 @@ export class ExternalLinks {
    * @returns {String}
    */
 
-  getFileExtension(url) {
-    let pathname;
+  getFileExtension(url: string) {
+    let pathname: string;
     try {
       // Create a URL object to easily get the pathname if there are params or fragments
       pathname = new URL(url).pathname;
@@ -81,7 +81,7 @@ export class ExternalLinks {
   * @param {HTML element} link
   * @returns {Boolean}
   */
-  isExternalLink(link) {
+  isExternalLink(link: HTMLAnchorElement) {
     return (
       (link.protocol === 'https:' || link.protocol === 'http:') &&
       location.hostname !== link.hostname &&
@@ -97,8 +97,8 @@ export class ExternalLinks {
    * @param {String} [domain=window.location.host] - The domain to match against. Defaults to the current host.
    * @returns {Boolean} - `true` if the URL's domain matches the given domain, `false` otherwise
    */
-  matchDomain(url, domain = window.location.host) {
-    let urlDomain;
+  matchDomain(url: string, domain = window.location.host) {
+    let urlDomain: string;;
     try {
       urlDomain = new URL(url).host;
     } catch {
@@ -111,3 +111,7 @@ export class ExternalLinks {
   }
 
 }
+
+// const links = document.querySelectorAll('a');
+
+// new ExternalLinks(links);
