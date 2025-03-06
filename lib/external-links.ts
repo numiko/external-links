@@ -56,8 +56,7 @@ export class ExternalLinks {
   /**
    * Get a files extension
    * https://www.jstips.co/en/javascript/get-file-extension/
-   * @param {String} url - Usually the href of a link
-   * @returns {String}
+   * url - Usually the href of a link
    */
 
 
@@ -94,9 +93,9 @@ export class ExternalLinks {
 
   /**
    * Test whether a URL matches a given domain
-   * @param {String} url - The URL to test
-   * @param {String} [domain=window.location.host] - The domain to match against. Defaults to the current host.
-   * @returns {Boolean} - `true` if the URL's domain matches the given domain, `false` otherwise
+   * url - The URL to test
+   * [domain=window.location.host] - The domain to match against. Defaults to the current host.
+   * true` if the URL's domain matches the given domain, `false` otherwise
    */
   matchDomain(url: string, domain: string = window.location.host): boolean {
     let urlDomain: string;;
