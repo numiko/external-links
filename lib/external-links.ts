@@ -7,8 +7,13 @@
  */
 
 export class ExternalLinks {
+  options: {
+    openPDFNewTab: boolean;
+  }
 
-  constructor(links = [], options = {}) {
+  links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[];
+
+  constructor(links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[] = [], options = {}) {
     this.options = {
       openPDFNewTab: true,
       ...options
