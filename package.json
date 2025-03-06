@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
+    "test:ci" : "vitest run --reporter junit --outputFile ./reports/results.xml --coverage.enabled --coverage.all false --coverage.reporter=html --coverage.reportsDirectory ./reports/results.xml",
     "release": "release-it"
   },
   "files": [
