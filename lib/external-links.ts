@@ -27,7 +27,7 @@ export class ExternalLinks {
    * @param {NodeList|Array} links - The links to process
    * @returns {void}
    */
-  addAttributesToLinks(links) {
+  addAttributesToLinks(links): void {
     for (const link of links) {
       const href = link.getAttribute('href');
       const isPDF = this.getFileExtension(href) === 'pdf';
@@ -60,7 +60,8 @@ export class ExternalLinks {
    * @returns {String}
    */
 
-  getFileExtension(url: string) {
+
+  getFileExtension(url: string): string {
     let pathname: string;
     try {
       // Create a URL object to easily get the pathname if there are params or fragments
@@ -97,7 +98,7 @@ export class ExternalLinks {
    * @param {String} [domain=window.location.host] - The domain to match against. Defaults to the current host.
    * @returns {Boolean} - `true` if the URL's domain matches the given domain, `false` otherwise
    */
-  matchDomain(url: string, domain = window.location.host) {
+  matchDomain(url: string, domain: string = window.location.host): boolean {
     let urlDomain: string;;
     try {
       urlDomain = new URL(url).host;
