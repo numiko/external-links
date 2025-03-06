@@ -24,12 +24,11 @@ export class ExternalLinks {
 
   /**
    * Add attributes to links
-   * @param {NodeList|Array} links - The links to process
-   * @returns {void}
+   * links - The links to process
    */
-  addAttributesToLinks(links): void {
+  addAttributesToLinks(links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[]): void {
     for (const link of links) {
-      const href = link.getAttribute('href');
+      const href: string = link.getAttribute('href') || " ";
       const isPDF = this.getFileExtension(href) === 'pdf';
       const isExternal = this.isExternalLink(link) && !this.matchDomain(href);
       if (isExternal || (isPDF && this.options.openPDFNewTab)) {
