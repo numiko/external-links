@@ -1,8 +1,10 @@
 # External Links
 
-## Description
-
 This JavaScript module provides functionality for handling external links on a webpage.
+
+## Features
+
+Once initialised this package will check a site for any links pointing to an external source. It will in turn change their behaviour so that they are opened in a new tab. 'Opens in new tab' will also be added to the aria-label attribute of these links.
 
 ## Installation
 
@@ -22,9 +24,9 @@ The ExternalLinks class will need to be initialized with a NodeList or Array of 
 ### JS
 
 ```javascript
-import ExternalLinks from '@numiko/external-links.js';
+import { ExternalLinks } from '@numiko/external-links';
 
-const links = document.querySelectorAll('a');
+const links = document.links;
 
 new ExternalLinks(links);
 ```
