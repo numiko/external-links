@@ -8,12 +8,9 @@ Once initialised this package will check a site for any links pointing to an ext
 
 ## Installation
 
-The package can be installed from BitBucket. If the package has reached version 1,
-prefer the semver method; if the package is not yet stable, we recommend installing via the tag.
+The package can be installed from BitBucket.
 
-`npm install ssh://git@bitbucket.org:numiko/external-links.git#<TAG_NAME>`
-
-`npm install ssh://git@bitbucket.org:numiko/external-links.git##semver:<VERSION>`
+`npm install ssh://git@bitbucket.org:numiko/external-links.git#semver:1.1.1`
 
 ## Usage
 
