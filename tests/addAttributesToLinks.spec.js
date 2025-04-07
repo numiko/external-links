@@ -49,6 +49,28 @@ describe('addAttributesToLinks Function', () => {
     });
   });
 
+  describe('External links with custom classes', () => {
+    const setupTestWithCustomClasses = (html) => {
+      document.body.innerHTML = html;
+      const tags = document.querySelectorAll('a');
+      externalLinks = new ExternalLinks(tags, {
+        classList: ['optionClass', 'optionClass2']
+      });
+      return tags[0];
+    };
+
+    const link = setupTestWithCustomClasses('<a href="https://external.com">External Link</a>');
+
+    it('adds custom classes from options', () => {
+      expect(link.classList.contains('optionClass')).toBe(true);
+      expect(link.classList.contains('optionClass2')).toBe(true);
+    });
+
+    it('does not add default external-link class when custom classes are provided', () => {
+      expect(link.classList.contains('external-link')).toBe(false);
+    });
+  });
+
   describe('External PDF links with no options passed', () => {
     const link = setupTest(
       '<a href="https://external.com/test.pdf">PDF Link</a>'
