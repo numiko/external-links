@@ -3,7 +3,7 @@ class r {
     this.options = {
       openPDFNewTab: !0,
       ...t
-    }, this.links = e, this.addAttributesToLinks(this.links);
+    }, this.icon = this.options.icon, this.links = e, this.addAttributesToLinks(this.links);
   }
   /**
    * Add attributes to links
@@ -12,11 +12,11 @@ class r {
    */
   addAttributesToLinks(e) {
     for (const t of e) {
-      const s = t.getAttribute("href"), n = this.getFileExtension(s) === "pdf";
-      (this.isExternalLink(t) && !this.matchDomain(s) || n && this.options.openPDFNewTab) && (t.hasAttribute("target") || t.setAttribute("target", "_blank"), t.hasAttribute("aria-label") || t.setAttribute(
+      const n = t.getAttribute("href"), i = this.getFileExtension(n) === "pdf";
+      (this.isExternalLink(t) && !this.matchDomain(n) || i && this.options.openPDFNewTab) && (t.hasAttribute("target") || t.setAttribute("target", "_blank"), t.hasAttribute("aria-label") || t.setAttribute(
         "aria-label",
         `${t.innerText.trim()} (Opens in new window)`
-      ), t.hasAttribute("rel") || t.setAttribute("rel", "noopener noreferrer"), t.classList.add("external-link"));
+      ), t.hasAttribute("rel") || t.setAttribute("rel", "noopener noreferrer"), t.classList.add("external-link"), this.icon && t.insertAdjacentHTML("beforeend", this.icon));
     }
   }
   /**
@@ -49,13 +49,13 @@ class r {
    * @returns {Boolean} - `true` if the URL's domain matches the given domain, `false` otherwise
    */
   matchDomain(e, t = window.location.host) {
-    let s;
+    let n;
     try {
-      s = new URL(e).host;
+      n = new URL(e).host;
     } catch {
       return !1;
     }
-    return s.toLowerCase() === t.toLowerCase() || s.toLowerCase().endsWith("." + t.toLowerCase());
+    return n.toLowerCase() === t.toLowerCase() || n.toLowerCase().endsWith("." + t.toLowerCase());
   }
 }
 export {
