@@ -2,6 +2,9 @@ class r {
   constructor(e = [], t = {}) {
     this.options = {
       openPDFNewTab: !0,
+      classList: [
+        "external-link"
+      ],
       ...t
     }, this.links = e, this.addAttributesToLinks(this.links);
   }
@@ -16,7 +19,7 @@ class r {
       (this.isExternalLink(t) && !this.matchDomain(s) || n && this.options.openPDFNewTab) && (t.hasAttribute("target") || t.setAttribute("target", "_blank"), t.hasAttribute("aria-label") || t.setAttribute(
         "aria-label",
         `${t.innerText.trim()} (Opens in new window)`
-      ), t.hasAttribute("rel") || t.setAttribute("rel", "noopener noreferrer"), t.classList.add("external-link"));
+      ), t.hasAttribute("rel") || t.setAttribute("rel", "noopener noreferrer"), t.classList.add(...this.options.classList));
     }
   }
   /**
