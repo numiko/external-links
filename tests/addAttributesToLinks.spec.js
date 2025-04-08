@@ -19,14 +19,23 @@ beforeEach(() => {
   document.body.innerHTML = '';
 });
 
-describe('addAttributesToLinks Function', () => {
-  const setupTest = (html) => {
-    document.body.innerHTML = html;
-    const tags = document.querySelectorAll('a');
-    externalLinks = new ExternalLinks(tags);
-    return tags[0];
-  };
+const setupTest = (html) => {
+  document.body.innerHTML = html;
+  const tags = document.querySelectorAll('a');
+  externalLinks = new ExternalLinks(tags);
+  return tags[0];
+};
 
+const setupTestWithCustomClasses = (html) => {
+  document.body.innerHTML = html;
+  const tags = document.querySelectorAll('a');
+  externalLinks = new ExternalLinks(tags, {
+    classList: ['optionClass', 'optionClass2']
+  });
+  return tags[0];
+};
+
+describe('addAttributesToLinks Function', () => {
   describe('External links', () => {
     const link = setupTest('<a href="https://external.com">External Link</a>');
 
@@ -50,15 +59,6 @@ describe('addAttributesToLinks Function', () => {
   });
 
   describe('External links with custom classes', () => {
-    const setupTestWithCustomClasses = (html) => {
-      document.body.innerHTML = html;
-      const tags = document.querySelectorAll('a');
-      externalLinks = new ExternalLinks(tags, {
-        classList: ['optionClass', 'optionClass2']
-      });
-      return tags[0];
-    };
-
     const link = setupTestWithCustomClasses('<a href="https://external.com">External Link</a>');
 
     it('adds custom classes from options', () => {
@@ -117,6 +117,18 @@ describe('addAttributesToLinks Function', () => {
     });
   });
 
+  describe('External links with existing classes', () => {
+    const link = setupTestWithCustomClasses(
+      '<a href="https://external.com" class="existing-class">Link</a>'
+    );
+
+    it('keeps existing class attribute and adds custom classes', () => {
+      expect(link.classList.contains('existing-class')).toBe(true);
+      expect(link.classList.contains('optionClass')).toBe(true);
+      expect(link.classList.contains('optionClass2')).toBe(true);
+    });
+  });
+
   describe('PDF links with existing attributes', () => {
     const link = setupTest(
       '<a href="https://example.com/test.pdf" target="_self" aria-label="Existing label" rel="existing rel" class="existing-class">Link</a>'
@@ -136,6 +148,18 @@ describe('addAttributesToLinks Function', () => {
 
     it('does not change class attribute', () => {
       expect(link.classList.contains('existing-class')).toBe(true);
+    });
+  });
+
+  describe('PDF links with existing classes and custom classes passed in options', () => {
+    const link = setupTestWithCustomClasses(
+      '<a href="https://example.com/test.pdf" class="existing-class">Link</a>'
+    );
+
+    it('keeps existing class attribute and adds custom classes', () => {
+      expect(link.classList.contains('existing-class')).toBe(true);
+      expect(link.classList.contains('optionClass')).toBe(true);
+      expect(link.classList.contains('optionClass2')).toBe(true);
     });
   });
 
