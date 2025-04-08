@@ -36,6 +36,8 @@ new ExternalLinks(links);
 | Option | Description | Type | Default |
 | --- | --- | --- | --- |
 | `openPDFNewTab` | Links to PDF's will open in a new tab | `boolean` | `true` |
+| `classList` | List of classes that can be added to the links | `array` | `[ external-link ]` |
+
 
 ### Methods
 
