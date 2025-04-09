@@ -15,11 +15,11 @@ class r {
    */
   addAttributesToLinks(e) {
     for (const t of e) {
-      const n = t.getAttribute("href"), i = this.getFileExtension(n) === "pdf";
-      (this.isExternalLink(t) && !this.matchDomain(n) || i && this.options.openPDFNewTab) && (t.hasAttribute("target") || t.setAttribute("target", "_blank"), t.hasAttribute("aria-label") || t.setAttribute(
+      const s = t.getAttribute("href"), i = this.getFileExtension(s) === "pdf";
+      (this.isExternalLink(t) && !this.matchDomain(s) || i && this.options.openPDFNewTab) && (t.hasAttribute("target") || t.setAttribute("target", "_blank"), t.hasAttribute("aria-label") || t.setAttribute(
         "aria-label",
         `${t.innerText.trim()} (Opens in new window)`
-      ), t.hasAttribute("rel") || t.setAttribute("rel", "noopener noreferrer"), t.classList.add(...this.options.classList));
+      ), t.hasAttribute("rel") || t.setAttribute("rel", "noopener noreferrer"), t.classList.add(...this.options.classList), this.icon && t.insertAdjacentHTML("beforeend", this.icon));
     }
   }
   /**
@@ -52,13 +52,13 @@ class r {
    * @returns {Boolean} - `true` if the URL's domain matches the given domain, `false` otherwise
    */
   matchDomain(e, t = window.location.host) {
-    let n;
+    let s;
     try {
-      n = new URL(e).host;
+      s = new URL(e).host;
     } catch {
       return !1;
     }
-    return n.toLowerCase() === t.toLowerCase() || n.toLowerCase().endsWith("." + t.toLowerCase());
+    return s.toLowerCase() === t.toLowerCase() || s.toLowerCase().endsWith("." + t.toLowerCase());
   }
 }
 export {
