@@ -35,6 +35,7 @@ new ExternalLinks(links);
 | Option | Description | Type | Default |
 | --- | --- | --- | --- |
 | `openPDFNewTab` | Links to PDF's will open in a new tab | `boolean` | `true` |
+| `icon` | Insert an icon to the links by adding an svg element as a string| `string` | No icon by default |
 
 ### Methods
 
