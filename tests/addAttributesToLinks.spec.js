@@ -19,19 +19,11 @@ beforeEach(() => {
   document.body.innerHTML = '';
 });
 
-const setupTest = (html) => {
+const setupTest = (html, classList = null) => {
   document.body.innerHTML = html;
   const tags = document.querySelectorAll('a');
-  externalLinks = new ExternalLinks(tags);
-  return tags[0];
-};
-
-const setupTestWithCustomClasses = (html) => {
-  document.body.innerHTML = html;
-  const tags = document.querySelectorAll('a');
-  externalLinks = new ExternalLinks(tags, {
-    classList: ['optionClass', 'optionClass2']
-  });
+  const options = classList ? { classList } : {};
+  externalLinks = new ExternalLinks(tags, options);
   return tags[0];
 };
 
@@ -84,7 +76,7 @@ describe('addAttributesToLinks Function', () => {
   });
 
   describe('External links with custom classes', () => {
-    const link = setupTestWithCustomClasses('<a href="https://external.com">External Link</a>');
+    const link = setupTest('<a href="https://external.com">External Link</a>', ['optionClass', 'optionClass2']);
 
     it('adds custom classes from options', () => {
       expect(link.classList.contains('optionClass')).toBe(true);
@@ -147,8 +139,9 @@ describe('addAttributesToLinks Function', () => {
   });
 
   describe('External links with existing classes', () => {
-    const link = setupTestWithCustomClasses(
-      '<a href="https://external.com" class="existing-class">Link</a>'
+    const link = setupTest(
+      '<a href="https://external.com" class="existing-class">Link</a>',
+      ['optionClass', 'optionClass2']
     );
 
     it('keeps existing class attribute and adds custom classes', () => {
@@ -181,8 +174,9 @@ describe('addAttributesToLinks Function', () => {
   });
 
   describe('PDF links with existing classes and custom classes passed in options', () => {
-    const link = setupTestWithCustomClasses(
-      '<a href="https://example.com/test.pdf" class="existing-class">Link</a>'
+    const link = setupTest(
+      '<a href="https://example.com/test.pdf" class="existing-class">Link</a>',
+      ['optionClass', 'optionClass2']
     );
 
     it('keeps existing class attribute and adds custom classes', () => {
