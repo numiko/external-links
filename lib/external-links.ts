@@ -57,8 +57,6 @@ export class ExternalLinks {
    * https://www.jstips.co/en/javascript/get-file-extension/
    * url - Usually the href of a link
    */
-
-
   getFileExtension(url: string): string {
     let pathname: string;
     try {
@@ -69,7 +67,7 @@ export class ExternalLinks {
       pathname = url;
     }
     // Get the value from the last "."
-    let extension = pathname.slice(((pathname.lastIndexOf('.') - 1) >>> 0) + 2);
+    let extension: string = pathname.slice(((pathname.lastIndexOf('.') - 1) >>> 0) + 2);
 
     return extension;
   }
@@ -77,10 +75,8 @@ export class ExternalLinks {
 
   /**
   * Test whether a link is external
-  * @param {HTML element} link
-  * @returns {Boolean}
   */
-  isExternalLink(link: HTMLAnchorElement) {
+  isExternalLink(link: HTMLAnchorElement): boolean | number {
     return (
       (link.protocol === 'https:' || link.protocol === 'http:') &&
       location.hostname !== link.hostname &&
@@ -97,7 +93,7 @@ export class ExternalLinks {
    * true` if the URL's domain matches the given domain, `false` otherwise
    */
   matchDomain(url: string, domain: string = window.location.host): boolean {
-    let urlDomain: string;;
+    let urlDomain: string;
     try {
       urlDomain = new URL(url).host;
     } catch {
@@ -111,6 +107,6 @@ export class ExternalLinks {
 
 }
 
-// const links = document.querySelectorAll('a');
+const links: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('a');
 
-// new ExternalLinks(links);
+new ExternalLinks(links);
