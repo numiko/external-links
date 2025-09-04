@@ -6,16 +6,25 @@
  * ignore the following settings.
  */
 
+
+interface ExternalLinksOptions {
+  openPDFNewTab: boolean;
+  classList: string[];
+  icon: string | null;
+}
+
 export class ExternalLinks {
-  options: {
-    openPDFNewTab: boolean;
-  }
+  options: Required<ExternalLinksOptions>;
 
   links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[];
 
   constructor(links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[] = [], options = {}) {
     this.options = {
       openPDFNewTab: true,
+      classList: [
+        'external-link',
+      ],
+      icon: null,
       ...options
     };
     this.links = links;
@@ -47,7 +56,12 @@ export class ExternalLinks {
           link.setAttribute('rel', 'noopener noreferrer');
         }
 
-        link.classList.add('external-link');
+
+        link.classList.add(...this.options.classList);
+
+        if (this.options.icon) {
+          link.insertAdjacentHTML('beforeend', this.options.icon);
+        }
       }
     }
   }
@@ -106,7 +120,6 @@ export class ExternalLinks {
   }
 
 }
-
 const links: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('a');
 
 new ExternalLinks(links);
