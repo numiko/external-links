@@ -29,8 +29,8 @@ export class ExternalLinks {
   addAttributesToLinks(links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[]): void {
     for (const link of links) {
       const href: string = link.getAttribute('href') || " ";
-      const isPDF = this.getFileExtension(href) === 'pdf';
-      const isExternal = this.isExternalLink(link) && !this.matchDomain(href);
+      const isPDF: boolean = this.getFileExtension(href) === 'pdf';
+      const isExternal: boolean = this.isExternalLink(link) && !this.matchDomain(href);
       if (isExternal || (isPDF && this.options.openPDFNewTab)) {
         if (!link.hasAttribute('target')) {
           link.setAttribute('target', '_blank');
@@ -76,11 +76,11 @@ export class ExternalLinks {
   /**
   * Test whether a link is external
   */
-  isExternalLink(link: HTMLAnchorElement): boolean | number {
+  isExternalLink(link: HTMLAnchorElement): boolean {
     return (
       (link.protocol === 'https:' || link.protocol === 'http:') &&
       location.hostname !== link.hostname &&
-      link.hostname.length &&
+      link.hostname.length > 0 &&
       link.hostname.slice(0, 1) !== '/'
     );
   }
