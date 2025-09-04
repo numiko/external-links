@@ -1,17 +1,16 @@
 # External Links
 
-## Description
-
 This JavaScript module provides functionality for handling external links on a webpage.
+
+## Features
+
+Once initialised this package will check a site for any links pointing to an external source. It will in turn change their behaviour so that they are opened in a new tab. 'Opens in new tab' will also be added to the aria-label attribute of these links.
 
 ## Installation
 
-The package can be installed from BitBucket. If the package has reached version 1,
-prefer the semver method; if the package is not yet stable, we recommend installing via the tag.
+The package can be installed from BitBucket.
 
-`npm install ssh://git@bitbucket.org:numiko/external-links.git#<TAG_NAME>`
-
-`npm install ssh://git@bitbucket.org:numiko/external-links.git##semver:<VERSION>`
+`npm install ssh://git@bitbucket.org:numiko/external-links.git#semver:1.1.1`
 
 ## Usage
 
@@ -22,9 +21,9 @@ The ExternalLinks class will need to be initialized with a NodeList or Array of 
 ### JS
 
 ```javascript
-import ExternalLinks from '@numiko/external-links.js';
+import { ExternalLinks } from '@numiko/external-links';
 
-const links = document.querySelectorAll('a');
+const links = document.links;
 
 new ExternalLinks(links);
 ```
@@ -36,6 +35,9 @@ new ExternalLinks(links);
 | Option | Description | Type | Default |
 | --- | --- | --- | --- |
 | `openPDFNewTab` | Links to PDF's will open in a new tab | `boolean` | `true` |
+| `icon` | Insert an icon to the links by adding an svg element as a string| `string` | No icon by default |
+| `classList` | List of classes that can be added to the links | `array` | `[ external-link ]` |
+
 
 ### Methods
 

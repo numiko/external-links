@@ -2,8 +2,11 @@ class r {
   constructor(e = [], t = {}) {
     this.options = {
       openPDFNewTab: !0,
+      classList: [
+        "external-link"
+      ],
       ...t
-    }, this.links = e, this.addAttributesToLinks(this.links);
+    }, this.icon = this.options.icon, this.links = e, this.addAttributesToLinks(this.links);
   }
   /**
    * Add attributes to links
@@ -12,11 +15,11 @@ class r {
    */
   addAttributesToLinks(e) {
     for (const t of e) {
-      const s = t.getAttribute("href"), n = this.getFileExtension(s) === "pdf";
-      (this.isExternalLink(t) && !this.matchDomain(s) || n && this.options.openPDFNewTab) && (t.hasAttribute("target") || t.setAttribute("target", "_blank"), t.hasAttribute("aria-label") || t.setAttribute(
+      const s = t.getAttribute("href"), i = this.getFileExtension(s) === "pdf";
+      (this.isExternalLink(t) && !this.matchDomain(s) || i && this.options.openPDFNewTab) && (t.hasAttribute("target") || t.setAttribute("target", "_blank"), t.hasAttribute("aria-label") || t.setAttribute(
         "aria-label",
         `${t.innerText.trim()} (Opens in new window)`
-      ), t.hasAttribute("rel") || t.setAttribute("rel", "noopener noreferrer"), t.classList.add("external-link"));
+      ), t.hasAttribute("rel") || t.setAttribute("rel", "noopener noreferrer"), t.classList.add(...this.options.classList), this.icon && t.insertAdjacentHTML("beforeend", this.icon));
     }
   }
   /**
