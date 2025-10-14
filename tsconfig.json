@@ -1,21 +1,15 @@
 {
+  "include": ["./src/**/*", "./lib/**/*"],
   "compilerOptions": {
-    "target": "ES2020",
-    "lib": ["ES2020", "DOM"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "strict": true,
+    "composite": true,
     "noEmit": true,
-    "strict": true
-  },
-  "include": [
-    "lib/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "allowJs": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noUncheckedIndexedAccess": true,
+    "types": ["vitest/globals"]
+  }
 }
