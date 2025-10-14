@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [eslint()],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'lib/external-links.js'),
+      entry: path.resolve(__dirname, 'lib/external-links.ts'),
       name: 'external-links',
       fileName: (format) => `external-links.${format}.js`
     },
