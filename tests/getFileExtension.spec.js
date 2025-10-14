@@ -9,7 +9,7 @@
  */
 
 import { it, expect, describe } from 'vitest';
-import { ExternalLinks } from '../lib/external-links.js';
+import { ExternalLinks } from '../lib/external-links.ts';
 
 let externalLinks;
 

@@ -11,7 +11,7 @@
  */
 
 import { it, expect, describe, beforeEach } from 'vitest';
-import { ExternalLinks } from '../lib/external-links.js';
+import { ExternalLinks } from '../lib/external-links.ts';
 
 beforeEach(() => {
   document.body.innerHTML = '';
