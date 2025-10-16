@@ -86,7 +86,6 @@ export class ExternalLinks {
     return extension;
   }
 
-
   /**
   * Test whether a link is external
   */
@@ -98,7 +97,6 @@ export class ExternalLinks {
       link.hostname.slice(0, 1) !== '/'
     );
   }
-
 
   /**
    * Test whether a URL matches a given domain
@@ -118,8 +116,8 @@ export class ExternalLinks {
       urlDomain.toLowerCase().endsWith('.' + domain.toLowerCase())
     );
   }
-
 }
+
 const links: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('a');
 
 new ExternalLinks(links);
