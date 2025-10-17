@@ -13,23 +13,6 @@
     "release": "release-it",
     "generate-docs": "typedoc lib/external-links.ts"
   },
-  "release-it": {
-    "after:bump": [
-      "npm run generate-docs",
-      "npm run build"
-    ],
-    "plugins": {
-      "@j-ulrich/release-it-regex-bumper": {
-        "out": [
-          {
-            "file": "README.md",
-            "search": "\\d+-\\d+-\\d+",
-            "replace": "{{major}}-{{minor}}-{{patch}}"
-          }
-        ]
-      }
-    }
-  },
   "files": [
     "dist",
     "package.json",
@@ -58,5 +41,24 @@
   },
   "dependencies": {
     "@j-ulrich/release-it-regex-bumper": "^5.3.0"
+  },
+  "release-it": {
+    "plugins": {
+      "@j-ulrich/release-it-regex-bumper": {
+        "out": [
+          {
+            "file": "README.md",
+            "search": "\\d+-\\d+-\\d+",
+            "replace": "{{major}}-{{minor}}-{{patch}}"
+          }
+        ]
+      }
+    }
+  },
+  "hooks": {
+    "after:bump": [
+      "npm run generate-docs",
+      "npm run build"
+    ]
   }
 }
