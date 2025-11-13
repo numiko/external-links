@@ -37,7 +37,7 @@ export class ExternalLinks {
    */
   addAttributesToLinks(links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[]): void {
     for (const link of links) {
-      const href: string = link.getAttribute('href') || " ";
+      const href: string = link.getAttribute('href') || '';
       const isPDF: boolean = this.getFileExtension(href) === 'pdf';
       const isExternal: boolean = this.isExternalLink(link) && !this.matchDomain(href);
       if (isExternal || (isPDF && this.options.openPDFNewTab)) {

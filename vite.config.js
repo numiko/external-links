@@ -5,12 +5,15 @@ import eslint from 'vite-plugin-eslint';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
-  plugins: [
-    eslint(),
-    dts({
-      insertTypesEntry: true,
-    })
-  ],
+  plugins: [eslint(), dts({
+    outDir: 'dist',
+    rollupTypes: true
+  })],
+  server: {
+    watch: {
+      include: ['src/**', 'lib/**']
+    }
+  },
   build: {
     lib: {
       entry: path.resolve(__dirname, 'lib/external-links.ts'),

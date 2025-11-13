@@ -15,7 +15,7 @@ class i {
    */
   addAttributesToLinks(e) {
     for (const t of e) {
-      const s = t.getAttribute("href") || " ", n = this.getFileExtension(s) === "pdf";
+      const s = t.getAttribute("href") || "", n = this.getFileExtension(s) === "pdf";
       (this.isExternalLink(t) && !this.matchDomain(s) || n && this.options.openPDFNewTab) && (t.hasAttribute("target") || t.setAttribute("target", "_blank"), t.hasAttribute("aria-label") || t.setAttribute(
         "aria-label",
         `${t.innerText.trim()} (Opens in new window)`
