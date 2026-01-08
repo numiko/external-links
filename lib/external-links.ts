@@ -7,14 +7,14 @@
  */
 
 
-interface ExternalLinksOptions {
+type ExternalLinksOptions = {
   openPDFNewTab: boolean;
   classList: string[];
   icon: string | null;
 }
 
 export class ExternalLinks {
-  options: Required<ExternalLinksOptions>;
+  options: ExternalLinksOptions;
 
   links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[];
 
@@ -71,7 +71,7 @@ export class ExternalLinks {
    * https://www.jstips.co/en/javascript/get-file-extension/
    * url - Usually the href of a link
    */
-  getFileExtension(url: string): string {
+  getFileExtension(url: string) {
     let pathname: string;
     try {
       // Create a URL object to easily get the pathname if there are params or fragments
@@ -89,7 +89,7 @@ export class ExternalLinks {
   /**
   * Test whether a link is external
   */
-  isExternalLink(link: HTMLAnchorElement): boolean {
+  isExternalLink(link: HTMLAnchorElement) {
     return (
       (link.protocol === 'https:' || link.protocol === 'http:') &&
       location.hostname !== link.hostname &&
@@ -117,7 +117,3 @@ export class ExternalLinks {
     );
   }
 }
-
-const links: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('a');
-
-new ExternalLinks(links);
