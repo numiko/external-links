@@ -1,6 +1,6 @@
 {
   "name": "@numiko/external-links",
-  "private": true,
+  "private": false,
   "version": "1.2.1",
   "type": "module",
   "scripts": {
@@ -58,7 +58,17 @@
       }
     }
   },
+  "npm": {
+    "publish": true,
+    "publishArgs": [
+      "--access",
+      "public"
+    ]
+  },
   "hooks": {
+    "before:init": [
+      "vitest run"
+    ],
     "after:bump": [
       "npm run generate-docs",
       "npm run build"
