@@ -9,7 +9,7 @@
  */
 
 import { beforeEach, describe, expect, it } from 'vitest';
-import { ExternalLinks } from '../lib/external-links.js';
+import { ExternalLinks } from '../lib/external-links.ts';
 
 // eslint-disable-next-line no-unused-vars
 let externalLinks;

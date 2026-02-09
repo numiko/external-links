@@ -8,8 +8,8 @@
  * To generate coverage: npm run test:coverage
  */
 
-import { it, expect, describe, beforeEach } from 'vitest';
-import { ExternalLinks } from '../lib/external-links.js';
+import { it, expect, describe } from 'vitest';
+import { ExternalLinks } from '../lib/external-links.ts';
 
 let externalLinks;
 
