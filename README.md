@@ -30,21 +30,4 @@ new ExternalLinks(links);
 
 ## API
 
-### Options
-
-| Option | Description | Type | Default |
-| --- | --- | --- | --- |
-| `openPDFNewTab` | Links to PDF's will open in a new tab | `boolean` | `true` |
-| `icon` | Insert an icon to the links by adding an svg element as a string| `string` | No icon by default |
-| `classList` | List of classes that can be added to the links | `array` | `[ external-link ]` |
-
-
-### Methods
-
-| Method | Description | Parameters | Return Type |
-| --- | --- | --- | --- |
-| `addAttributesToLinks(links)` | Is automatically called when the ExternalLinks class is initialized. It scans the webpage for external links and adds the specific attributes: `rel="noopener noreferrer"` `target="_blank"` `aria-label="Opens in a new tab"` `class="external-link"` to them to improve security, accessibility, and user experience. | `links: NodeList\|Array` | `void` |
-| |  |  |  |
-| `getFileExtension(url)` | Extracts and returns the file extension from a given URL or pathname. E.g. `https://www.example.com/file.pdf` returns `pdf`. | `url: string` | `string` |
-| `isExternalLink(link)` | Checks if a given link is external. A link is considered external if it uses the `http:` or `https:` protocol, its hostname is different from the current location's hostname, and its hostname is not a relative path. | `link: HTMLElement` | `boolean` |
-| `matchDomain(url, domain?)` | Checks if the domain of a given URL matches a specified domain. If no domain is provided, it defaults to the current host. Returns `true` if the URL's domain matches the given domain (case-insensitive). It also considers subdomains as a match (e.g., `www.example.com` matches `example.com`). | `url: string`, `domain?: string` | `boolean` |
+See [documentation](https://v1-2-1--numiko-external-links.netlify.app/) for more detail on how to use the package.
