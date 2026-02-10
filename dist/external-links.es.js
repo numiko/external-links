@@ -1,4 +1,4 @@
-class i {
+class r {
   constructor(e = [], t = {}) {
     this.options = {
       openPDFNewTab: !0,
@@ -58,8 +58,6 @@ class i {
     return s.toLowerCase() === t.toLowerCase() || s.toLowerCase().endsWith("." + t.toLowerCase());
   }
 }
-const o = document.querySelectorAll("a");
-new i(o);
 export {
-  i as ExternalLinks
+  r as ExternalLinks
 };

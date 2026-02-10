@@ -1,5 +1,5 @@
 export declare class ExternalLinks {
-    options: Required<ExternalLinksOptions>;
+    options: ExternalLinksOptions;
     links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[];
     constructor(links?: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[], options?: {});
     /**
@@ -26,10 +26,10 @@ export declare class ExternalLinks {
     matchDomain(url: string, domain?: string): boolean;
 }
 
-declare interface ExternalLinksOptions {
+declare type ExternalLinksOptions = {
     openPDFNewTab: boolean;
     classList: string[];
     icon: string | null;
-}
+};
 
 export { }

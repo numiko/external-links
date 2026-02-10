@@ -28,4 +28,4 @@ new ExternalLinks(links);
 
 ## API
 
-See [documentation](https://v1-2-1--numiko-external-links.netlify.app/) for more detail on how to use the package.
+See [documentation](https://v1-3-0--numiko-external-links.netlify.app/) for more detail on how to use the package.
