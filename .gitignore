@@ -24,3 +24,7 @@ dist-ssr
 
 coverage/
 /reports/
+docs/
+
+# Local Netlify folder
+.netlify

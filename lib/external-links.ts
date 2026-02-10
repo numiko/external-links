@@ -6,31 +6,40 @@
  * ignore the following settings.
  */
 
-export class ExternalLinks {
 
-  constructor(links = [], options = {}) {
+type ExternalLinksOptions = {
+  openPDFNewTab: boolean;
+  classList: string[];
+  icon: string | null;
+}
+
+export class ExternalLinks {
+  options: ExternalLinksOptions;
+
+  links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[];
+
+  constructor(links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[] = [], options = {}) {
     this.options = {
       openPDFNewTab: true,
       classList: [
         'external-link',
       ],
+      icon: null,
       ...options
     };
-    this.icon = this.options.icon;
     this.links = links;
     this.addAttributesToLinks(this.links);
   }
 
   /**
    * Add attributes to links
-   * @param {NodeList|Array} links - The links to process
-   * @returns {void}
+   * links - The links to process
    */
-  addAttributesToLinks(links) {
+  addAttributesToLinks(links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[]): void {
     for (const link of links) {
-      const href = link.getAttribute('href');
-      const isPDF = this.getFileExtension(href) === 'pdf';
-      const isExternal = this.isExternalLink(link) && !this.matchDomain(href);
+      const href: string = link.getAttribute('href') || '';
+      const isPDF: boolean = this.getFileExtension(href) === 'pdf';
+      const isExternal: boolean = this.isExternalLink(link) && !this.matchDomain(href);
       if (isExternal || (isPDF && this.options.openPDFNewTab)) {
         if (!link.hasAttribute('target')) {
           link.setAttribute('target', '_blank');
@@ -47,10 +56,11 @@ export class ExternalLinks {
           link.setAttribute('rel', 'noopener noreferrer');
         }
 
+
         link.classList.add(...this.options.classList);
 
-        if (this.icon) {
-          link.insertAdjacentHTML('beforeend', this.icon);
+        if (this.options.icon) {
+          link.insertAdjacentHTML('beforeend', this.options.icon);
         }
       }
     }
@@ -59,12 +69,10 @@ export class ExternalLinks {
   /**
    * Get a files extension
    * https://www.jstips.co/en/javascript/get-file-extension/
-   * @param {String} url - Usually the href of a link
-   * @returns {String}
+   * url - Usually the href of a link
    */
-
-  getFileExtension(url) {
-    let pathname;
+  getFileExtension(url: string) {
+    let pathname: string;
     try {
       // Create a URL object to easily get the pathname if there are params or fragments
       pathname = new URL(url).pathname;
@@ -73,35 +81,31 @@ export class ExternalLinks {
       pathname = url;
     }
     // Get the value from the last "."
-    let extension = pathname.slice(((pathname.lastIndexOf('.') - 1) >>> 0) + 2);
+    let extension: string = pathname.slice(((pathname.lastIndexOf('.') - 1) >>> 0) + 2);
 
     return extension;
   }
 
-
   /**
   * Test whether a link is external
-  * @param {HTML element} link
-  * @returns {Boolean}
   */
-  isExternalLink(link) {
+  isExternalLink(link: HTMLAnchorElement) {
     return (
       (link.protocol === 'https:' || link.protocol === 'http:') &&
       location.hostname !== link.hostname &&
-      link.hostname.length &&
+      link.hostname.length > 0 &&
       link.hostname.slice(0, 1) !== '/'
     );
   }
 
-
   /**
    * Test whether a URL matches a given domain
-   * @param {String} url - The URL to test
-   * @param {String} [domain=window.location.host] - The domain to match against. Defaults to the current host.
-   * @returns {Boolean} - `true` if the URL's domain matches the given domain, `false` otherwise
+   * url - The URL to test
+   * [domain=window.location.host] - The domain to match against. Defaults to the current host.
+   * true` if the URL's domain matches the given domain, `false` otherwise
    */
-  matchDomain(url, domain = window.location.host) {
-    let urlDomain;
+  matchDomain(url: string, domain: string = window.location.host): boolean {
+    let urlDomain: string;
     try {
       urlDomain = new URL(url).host;
     } catch {
@@ -112,5 +116,4 @@ export class ExternalLinks {
       urlDomain.toLowerCase().endsWith('.' + domain.toLowerCase())
     );
   }
-
 }
