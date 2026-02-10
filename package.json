@@ -70,7 +70,8 @@
       ],
       "after:bump": [
         "npm run generate-docs",
-        "npm run build"
+        "npm run build",
+        "npm run deploy-docs"
       ]
     }
   }
