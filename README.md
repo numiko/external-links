@@ -12,10 +12,6 @@ Once initialised this package will check a site for any links pointing to an ext
 
 ## Usage
 
-The ExternalLinks class will need to be initialized in a JavaScript file. This usually lives in the `src/js/numiko/` directory.
-
-The ExternalLinks class will need to be initialized with a NodeList or Array of links.
-
 ### JS
 
 ```javascript
