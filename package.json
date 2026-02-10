@@ -1,6 +1,6 @@
 {
   "name": "@numiko/external-links",
-  "private": true,
+  "private": false,
   "version": "1.2.1",
   "type": "module",
   "scripts": {
@@ -31,6 +31,7 @@
     "eslint": "^9.12.0",
     "globals": "^15.11.0",
     "happy-dom": "^15.7.4",
+    "netlify-cli": "^23.15.1",
     "release-it": "^17.10.0",
     "typedoc": "^0.28.14",
     "typescript": "^5.8.3",
@@ -57,7 +58,17 @@
       }
     }
   },
+  "npm": {
+    "publish": true,
+    "publishArgs": [
+      "--access",
+      "public"
+    ]
+  },
   "hooks": {
+    "before:init": [
+      "vitest run"
+    ],
     "after:bump": [
       "npm run generate-docs",
       "npm run build"
