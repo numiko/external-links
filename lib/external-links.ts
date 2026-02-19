@@ -11,12 +11,15 @@ type ExternalLinksOptions = {
   openPDFNewTab: boolean;
   classList: string[];
   icon: string | null;
+  domain?: string;
 }
 
 export class ExternalLinks {
   options: ExternalLinksOptions;
 
   links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[];
+
+  baseDomain: string | null = null;
 
   constructor(links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[] = [], options = {}) {
     this.options = {
@@ -27,6 +30,10 @@ export class ExternalLinks {
       icon: null,
       ...options
     };
+    if (this.options.domain != null && this.options.domain !== '') {
+      const d = this.options.domain.toLowerCase().trim();
+      this.baseDomain = d.startsWith('www.') ? d.slice(4) : d;
+    }
     this.links = links;
     this.addAttributesToLinks(this.links);
   }
@@ -99,21 +106,27 @@ export class ExternalLinks {
   }
 
   /**
-   * Test whether a URL matches a given domain
-   * url - The URL to test
-   * [domain=window.location.host] - The domain to match against. Defaults to the current host.
-   * true` if the URL's domain matches the given domain, `false` otherwise
+   * Test whether a URL matches the site domain (or a given domain when passed).
+   * Uses the declared domain from the constructor when set; otherwise falls back to the given domain or window.location.host.
+   * Treats www and non-www as the same base (e.g. example.com and www.example.com both match).
+   * Also treats subdomains as same-site (e.g. sub.example.com, www.sub.example.com when domain is example.com).
+   * @param url - The URL to test
+   * @param domainOverride - Optional domain to match against. When not passed, uses the instance's declared domain or current host.
+   * @returns `true` if the URL's host matches the base domain or is a subdomain of it, `false` otherwise
    */
-  matchDomain(url: string, domain: string = window.location.host): boolean {
-    let urlDomain: string;
+  matchDomain(url: string, domainOverride?: string): boolean {
+    let urlHost: string;
     try {
-      urlDomain = new URL(url).host;
+      urlHost = new URL(url).host.toLowerCase();
     } catch {
       return false;
     }
+    const domainToMatch = (domainOverride ?? this.baseDomain ?? window.location.host).toLowerCase();
+    const base = domainToMatch.startsWith('www.') ? domainToMatch.slice(4) : domainToMatch;
+    const urlBase = urlHost.startsWith('www.') ? urlHost.slice(4) : urlHost;
     return (
-      urlDomain.toLowerCase() === domain.toLowerCase() ||
-      urlDomain.toLowerCase().endsWith('.' + domain.toLowerCase())
+      urlBase === base ||
+      urlBase.endsWith('.' + base)
     );
   }
 }
