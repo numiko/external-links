@@ -31,8 +31,8 @@ export class ExternalLinks {
       ...options
     };
     if (this.options.domain != null && this.options.domain !== '') {
-      const d = this.options.domain.toLowerCase().trim();
-      this.baseDomain = d.startsWith('www.') ? d.slice(4) : d;
+      const normalisedDomain = this.options.domain.toLowerCase().trim();
+      this.baseDomain = normalisedDomain.startsWith('www.') ? normalisedDomain.slice(4) : normalisedDomain;
     }
     this.links = links;
     this.addAttributesToLinks(this.links);
