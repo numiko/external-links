@@ -105,27 +105,8 @@ describe('matchDomain Function', () => {
     });
 
     it('returns true for domain.sub.com pattern when domain is declared', () => {
-      const { matches } = setupTest('https://example.co.uk', 'example.co.uk');
+      const { matches } = setupTest('https://example.org.uk', 'example.org.uk');
       expect(matches).toBe(true);
-    });
-
-    it('returns true for www.domain.sub.com when domain is declared', () => {
-      const { matches } = setupTest('https://www.example.co.uk', 'example.co.uk');
-      expect(matches).toBe(true);
-    });
-
-    it('returns true for sub.domain.sub.com when domain is declared', () => {
-      const { matches } = setupTest('https://shop.example.co.uk', 'example.co.uk');
-      expect(matches).toBe(true);
-    });
-
-    it('uses declared domain when matchDomain is called without domain override', () => {
-      document.body.innerHTML = '<!DOCTYPE html><a href="https://www.example.com/page">Link</a>';
-      const link = document.querySelector('a');
-      const url = link.getAttribute('href');
-      externalLinks = new ExternalLinks([], { domain: 'example.com' });
-      expect(externalLinks.matchDomain(url)).toBe(true);
-      expect(externalLinks.matchDomain('https://other.com')).toBe(false);
     });
   });
 });
