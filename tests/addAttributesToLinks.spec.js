@@ -20,8 +20,8 @@ beforeEach(() => {
 const setupTest = (html, classList = null, options = {}) => {
   document.body.innerHTML = html;
   const tags = document.querySelectorAll('a');
-  const opts = classList ? { ...options, classList } : (options && Object.keys(options).length ? options : {});
-  new ExternalLinks(tags, Object.keys(opts).length ? opts : (classList ? { classList } : {}));
+  const opts = classList ? { ...options, classList } : options;
+  new ExternalLinks(tags, opts);
   return tags[0];
 };
 

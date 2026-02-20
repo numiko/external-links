@@ -18,10 +18,15 @@ beforeEach(() => {
 });
 
 describe('matchDomain Function', () => {
-  const setupTest = (innerHTML, domain) => {
-    document.body.innerHTML = `<!DOCTYPE html><a href="${innerHTML}">Link</a>`;
+  const setupTest = (href, domain, options) => {
+    document.body.innerHTML = `<!DOCTYPE html><a href="${href}">Link</a>`;
     const link = document.querySelector('a');
     const url = link.getAttribute('href');
+    if (options !== undefined) {
+      externalLinks = new ExternalLinks([], options);
+      const matches = externalLinks.matchDomain(url);
+      return { url, matches };
+    }
     externalLinks = new ExternalLinks();
     const matches = externalLinks.matchDomain(url, domain);
     return { url, matches };
@@ -84,19 +89,13 @@ describe('matchDomain Function', () => {
 
   describe('www and declared domain', () => {
     it('returns true when URL is www and domain is declared without www', () => {
-      document.body.innerHTML = '<!DOCTYPE html><a href="https://www.example.com">Link</a>';
-      const link = document.querySelector('a');
-      const url = link.getAttribute('href');
-      externalLinks = new ExternalLinks([], { domain: 'example.com' });
-      expect(externalLinks.matchDomain(url)).toBe(true);
+      const { matches } = setupTest('https://www.example.com', undefined, { domain: 'example.com' });
+      expect(matches).toBe(true);
     });
 
     it('returns true when URL is without www and domain is declared with www', () => {
-      document.body.innerHTML = '<!DOCTYPE html><a href="https://example.com">Link</a>';
-      const link = document.querySelector('a');
-      const url = link.getAttribute('href');
-      externalLinks = new ExternalLinks([], { domain: 'www.example.com' });
-      expect(externalLinks.matchDomain(url)).toBe(true);
+      const { matches } = setupTest('https://example.com', undefined, { domain: 'www.example.com' });
+      expect(matches).toBe(true);
     });
 
     it('returns true for www.sub.domain when domain is declared', () => {
