@@ -28,7 +28,7 @@ export class ExternalLinks {
         'external-link',
       ],
       icon: null,
-      ...options
+      ...(options ?? {})
     };
     if (this.options.domain != null && this.options.domain !== '') {
       const normalisedDomain = this.options.domain.toLowerCase().trim();

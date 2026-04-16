@@ -20,15 +20,11 @@ beforeEach(() => {
 describe('matchDomain Function', () => {
   const setupTest = (href, domain, options) => {
     document.body.innerHTML = `<!DOCTYPE html><a href="${href}">Link</a>`;
-    const link = document.querySelector('a');
-    const url = link.getAttribute('href');
-    if (options !== undefined) {
-      externalLinks = new ExternalLinks([], options);
-      const matches = externalLinks.matchDomain(url);
-      return { url, matches };
-    }
-    externalLinks = new ExternalLinks();
+    const url = document.querySelector('a').getAttribute('href');
+
+    externalLinks = new ExternalLinks([], options);
     const matches = externalLinks.matchDomain(url, domain);
+
     return { url, matches };
   };
 
