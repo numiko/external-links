@@ -79,6 +79,31 @@
       <a id="local" href="">http://localhost:5173/test.pdf</a>
     </div>
 
+    <h2 class="text-xl font-bold">
+      Same-site links (declared domain: example.com — no external attributes)
+    </h2>
+    <p class="text-sm text-slate-600">
+      When ExternalLinks is initialised with <code>domain: 'example.com'</code>,
+      these links are treated as same-site and do not get target="_blank" or the
+      external-link class.
+    </p>
+    <div>
+      <h3 class="font-bold">www variant</h3>
+      <a href="https://www.example.com">https://www.example.com</a>
+    </div>
+    <div>
+      <h3 class="font-bold">Subdomain</h3>
+      <a href="https://app.example.com">https://app.example.com</a>
+    </div>
+    <div>
+      <h3 class="font-bold">www + subdomain</h3>
+      <a href="https://www.app.example.com">https://www.app.example.com</a>
+    </div>
+    <div>
+      <h3 class="font-bold">Same-site PDF (example.com)</h3>
+      <a href="https://example.com/test.pdf">https://example.com/test.pdf</a>
+    </div>
+
     <script>
       // Used to update href of current domain link
       document.getElementById(
@@ -86,7 +111,10 @@
       ).href = `${window.location.origin}/test.pdf`;
     </script>
     <script type="module">
-      import './lib/external-links.ts';
+      import { ExternalLinks } from './lib/external-links.ts';
+      new ExternalLinks(document.querySelectorAll('a'), {
+        domain: 'example.com',
+      });
     </script>
   </body>
 </html>

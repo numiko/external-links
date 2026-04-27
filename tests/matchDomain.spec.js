@@ -18,12 +18,13 @@ beforeEach(() => {
 });
 
 describe('matchDomain Function', () => {
-  const setupTest = (innerHTML, domain) => {
-    document.body.innerHTML = `<!DOCTYPE html><a href="${innerHTML}">Link</a>`;
-    const link = document.querySelector('a');
-    const url = link.getAttribute('href');
-    externalLinks = new ExternalLinks();
+  const setupTest = (href, domain, options) => {
+    document.body.innerHTML = `<!DOCTYPE html><a href="${href}">Link</a>`;
+    const url = document.querySelector('a').getAttribute('href');
+
+    externalLinks = new ExternalLinks([], options);
     const matches = externalLinks.matchDomain(url, domain);
+
     return { url, matches };
   };
 
@@ -80,5 +81,27 @@ describe('matchDomain Function', () => {
   it('returns false when URL is an anchor id', () => {
     const { matches } = setupTest('#section', 'example.com');
     expect(matches).toBe(false);
+  });
+
+  describe('www and declared domain', () => {
+    it('returns true when URL is www and domain is declared without www', () => {
+      const { matches } = setupTest('https://www.example.com', undefined, { domain: 'example.com' });
+      expect(matches).toBe(true);
+    });
+
+    it('returns true when URL is without www and domain is declared with www', () => {
+      const { matches } = setupTest('https://example.com', undefined, { domain: 'www.example.com' });
+      expect(matches).toBe(true);
+    });
+
+    it('returns true for www.sub.domain when domain is declared', () => {
+      const { matches } = setupTest('https://www.sub.example.com', 'example.com');
+      expect(matches).toBe(true);
+    });
+
+    it('returns true for domain.sub.com pattern when domain is declared', () => {
+      const { matches } = setupTest('https://example.org.uk', 'example.org.uk');
+      expect(matches).toBe(true);
+    });
   });
 });

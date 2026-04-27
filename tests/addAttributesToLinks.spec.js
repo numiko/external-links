@@ -17,11 +17,11 @@ beforeEach(() => {
   document.body.innerHTML = '';
 });
 
-const setupTest = (html, classList = null) => {
+const setupTest = (html, classList = null, options = {}) => {
   document.body.innerHTML = html;
   const tags = document.querySelectorAll('a');
-  const options = classList ? { classList } : {};
-  new ExternalLinks(tags, options);
+  const opts = classList ? { ...options, classList } : options;
+  new ExternalLinks(tags, opts);
   return tags[0];
 };
 
@@ -181,6 +181,26 @@ describe('addAttributesToLinks Function', () => {
       expect(link.classList.contains('existing-class')).toBe(true);
       expect(link.classList.contains('optionClass')).toBe(true);
       expect(link.classList.contains('optionClass2')).toBe(true);
+    });
+  });
+
+  describe('Internal links (same site via declared domain)', () => {
+    it('treats www as same site when domain is declared without www', () => {
+      const link = setupTest('<a href="https://www.example.com">Same site via www</a>', null, { domain: 'example.com' });
+      expect(link.getAttribute('target')).toBe(null);
+      expect(link.classList.contains('external-link')).toBe(false);
+    });
+
+    it('treats subdomain as same site when domain is declared', () => {
+      const link = setupTest('<a href="https://app.example.com">Same site subdomain</a>', null, { domain: 'example.com' });
+      expect(link.getAttribute('target')).toBe(null);
+      expect(link.classList.contains('external-link')).toBe(false);
+    });
+
+    it('treats www.sub as same site when domain is declared', () => {
+      const link = setupTest('<a href="https://www.app.example.com">Same site www subdomain</a>', null, { domain: 'example.com' });
+      expect(link.getAttribute('target')).toBe(null);
+      expect(link.classList.contains('external-link')).toBe(false);
     });
   });
 
