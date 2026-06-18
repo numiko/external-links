@@ -26,7 +26,7 @@ export declare class ExternalLinks {
     matchDomain(url: string, domain?: string): boolean;
 }
 
-declare type ExternalLinksOptions = {
+export declare type ExternalLinksOptions = {
     openPDFNewTab: boolean;
     classList: string[];
     icon: string | null;
