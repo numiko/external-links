@@ -7,7 +7,7 @@
  */
 
 
-type ExternalLinksOptions = {
+export type ExternalLinksOptions = {
   openPDFNewTab: boolean;
   classList: string[];
   icon: string | null;
