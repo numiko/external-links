@@ -8,6 +8,8 @@ export default defineConfig({
   plugins: [
     eslint(),
     dts({
+      tsconfigPath: './tsconfig.dts.json',
+      entryRoot: 'lib',
       outDir: 'dist',
       rollupTypes: true
     })
@@ -19,13 +21,13 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'lib/external-links.ts'),
+      entry: path.resolve(import.meta.dirname, 'lib/external-links.ts'),
       name: 'external-links',
       fileName: (format) => `external-links.${format}.js`
     },
   },
   test: {
-    setupFiles: [path.resolve(__dirname, './test-setup.js')],
+    setupFiles: [path.resolve(import.meta.dirname, './test-setup.js')],
     coverage: {
       provider: 'v8',
     },
