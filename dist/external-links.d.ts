@@ -1,3 +1,8 @@
+export type ExternalLinksOptions = {
+    openPDFNewTab: boolean;
+    classList: string[];
+    icon: string | null;
+};
 export declare class ExternalLinks {
     options: ExternalLinksOptions;
     links: NodeListOf<HTMLAnchorElement> | HTMLAnchorElement[];
@@ -14,8 +19,8 @@ export declare class ExternalLinks {
      */
     getFileExtension(url: string): string;
     /**
-     * Test whether a link is external
-     */
+    * Test whether a link is external
+    */
     isExternalLink(link: HTMLAnchorElement): boolean;
     /**
      * Test whether a URL matches a given domain
@@ -25,11 +30,3 @@ export declare class ExternalLinks {
      */
     matchDomain(url: string, domain?: string): boolean;
 }
-
-export declare type ExternalLinksOptions = {
-    openPDFNewTab: boolean;
-    classList: string[];
-    icon: string | null;
-};
-
-export { }
