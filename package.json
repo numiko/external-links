@@ -13,7 +13,7 @@
     "test:ci": "vitest --run --reporter junit --outputFile ./reports/results.xml --coverage.enabled --coverage.include lib --coverage.reporter=html --coverage.reportsDirectory ./reports/",
     "generate-docs": "typedoc lib/external-links.ts",
     "deploy-docs": "netlify deploy --dir=docs --site=7e2d6232-b0e0-4182-b90e-7270a471aad2 --alias=v$(node -p \"require('./package.json').version\") && netlify deploy --dir=docs --site=7e2d6232-b0e0-4182-b90e-7270a471aad2 --prod",
-    "release": "echo 'Releasing package. Ensure the module is linked to the Netlify project using `netlify link`.'; release-it release"
+    "release": "echo 'Releasing package.'; release-it release"
   },
   "main": "./dist/external-links.umd.js",
   "files": [
