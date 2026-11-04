@@ -1,4 +1,4 @@
-//#region lib/external-links.ts
+// lib/external-links.ts
 var e = class {
 	constructor(e = [], t = {}) {
 		this.options = {
@@ -36,5 +36,4 @@ var e = class {
 		return n.toLowerCase() === t.toLowerCase() || n.toLowerCase().endsWith("." + t.toLowerCase());
 	}
 };
-//#endregion
 export { e as ExternalLinks };
