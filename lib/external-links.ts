@@ -81,7 +81,7 @@ export class ExternalLinks {
       pathname = url;
     }
     // Get the value from the last "."
-    let extension: string = pathname.slice(((pathname.lastIndexOf('.') - 1) >>> 0) + 2);
+    const extension: string = pathname.slice(((pathname.lastIndexOf('.') - 1) >>> 0) + 2);
 
     return extension;
   }
