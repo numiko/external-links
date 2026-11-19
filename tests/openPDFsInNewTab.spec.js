@@ -11,9 +11,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { ExternalLinks } from '../lib/external-links.ts';
 
-// eslint-disable-next-line no-unused-vars
-let externalLinks;
-
 beforeEach(() => {
   document.body.innerHTML = '';
 });
@@ -22,7 +19,7 @@ describe('option: openPDFNewTab', () => {
   const setupTest = (options, html) => {
     document.body.innerHTML = html;
     const tags = document.querySelectorAll('a');
-    externalLinks = new ExternalLinks(tags, options);
+    new ExternalLinks(tags, options);
     return tags[0];
   };
 

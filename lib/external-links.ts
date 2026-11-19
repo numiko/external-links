@@ -11,7 +11,7 @@ export type ExternalLinksOptions = {
   openPDFNewTab: boolean;
   classList: string[];
   icon: string | null;
-}
+};
 
 export class ExternalLinks {
   options: ExternalLinksOptions;
@@ -76,12 +76,11 @@ export class ExternalLinks {
     try {
       // Create a URL object to easily get the pathname if there are params or fragments
       pathname = new URL(url).pathname;
-      // eslint-disable-next-line no-unused-vars
-    } catch (e) {
+    } catch {
       pathname = url;
     }
     // Get the value from the last "."
-    let extension: string = pathname.slice(((pathname.lastIndexOf('.') - 1) >>> 0) + 2);
+    const extension: string = pathname.slice(((pathname.lastIndexOf('.') - 1) >>> 0) + 2);
 
     return extension;
   }
