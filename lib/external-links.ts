@@ -11,6 +11,11 @@ export type ExternalLinksOptions = {
   openPDFNewTab: boolean;
   classList: string[];
   icon: string | null;
+  /**
+   * The site's main domain, e.g. `example.com`. Links to this domain, its `www`
+   * version and its subdomains are treated as the same site.
+   * Defaults to the current host.
+   */
   domain?: string;
 };
 

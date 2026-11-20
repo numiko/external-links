@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test suite for External Links</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Visual marker so results can be checked without dev tools */
+      a[target='_blank']::after {
+        content: 'new tab';
+        margin-left: 0.5rem;
+        padding: 0 0.375rem;
+        border-radius: 0.25rem;
+        background: #fde68a;
+        color: #78350f;
+        font-size: 0.75rem;
+      }
+      a:not([target='_blank'])::after {
+        content: 'same tab';
+        margin-left: 0.5rem;
+        padding: 0 0.375rem;
+        border-radius: 0.25rem;
+        background: #bbf7d0;
+        color: #14532d;
+        font-size: 0.75rem;
+      }
+    </style>
   </head>
 
   <body
@@ -12,107 +33,164 @@
   >
     <h1 class="text-2xl font-bold">Test suite for External Links</h1>
 
-    <p>See dev tools to check attributes</p>
+    <p>See dev tools to check attributes. Each link is marked "new tab" or "same tab".</p>
 
-    <h2 class="text-xl font-bold">Links that should have the attributes:</h2>
+    <section id="default" class="flex flex-col items-center space-y-4">
+      <h2 class="text-xl font-bold">Default options</h2>
+      <p class="text-sm text-slate-600">
+        Initialised with <code>new ExternalLinks(links)</code>.
+      </p>
 
-    <ul>
-      <li>rel="noopener noreferrer"</li>
-      <li>target="_blank"</li>
-      <li>aria-label="Opens in a new tab"</li>
-      <li>class="external-link"</li>
-    </ul>
+      <h2 class="text-xl font-bold">Links that should have the attributes:</h2>
 
-    <div>
-      <h3 class="font-bold">External links</h3>
-      <a href="https://external.com">https://external.com</a>
-    </div>
+      <ul>
+        <li>rel="noopener noreferrer"</li>
+        <li>target="_blank"</li>
+        <li>aria-label="Opens in a new tab"</li>
+        <li>class="external-link"</li>
+      </ul>
 
-    <div>
-      <h3 class="font-bold">External PDF Links</h3>
-      <a href="https://external.com/test.pdf">https://external.com/test.pdf</a>
-    </div>
+      <div>
+        <h3 class="font-bold">External links</h3>
+        <a href="https://external.com">https://external.com</a>
+      </div>
 
-    <h2 class="text-xl font-bold">
-      Links that should keep their existing attributes:
-    </h2>
-    <ul>
-      <li>rel="existing rel"</li>
-      <li>target="_self"</li>
-      <li>aria-label="Existing label"</li>
-      <li>class="external-link"</li>
-    </ul>
+      <div>
+        <h3 class="font-bold">External PDF Links</h3>
+        <a href="https://external.com/test.pdf">https://external.com/test.pdf</a>
+      </div>
 
-    <div>
-      <h3 class="font-bold">External links with existing attributes</h3>
-      <a
-        href="https://external.com"
-        target="_self"
-        aria-label="existing label"
-        rel="existing rel"
-        class="existing-class"
-        >https://external.com</a
-      >
-    </div>
+      <div>
+        <h3 class="font-bold">
+          Another site's domain and subdomains (no <code>domain</code> option, so
+          matched against the current host)
+        </h3>
+        <a href="https://www.example.com">https://www.example.com</a><br />
+        <a href="https://app.example.com">https://app.example.com</a>
+      </div>
 
-    <div>
-      <h3 class="font-bold">PDF links with existing attributes</h3>
-      <a
-        href="https://example.com/test.pdf"
-        target="_self"
-        aria-label="existing label"
-        rel="existing rel"
-        class="existing-class"
-        >https://example.com/test.pdf</a
-      >
-    </div>
+      <h2 class="text-xl font-bold">
+        Links that should keep their existing attributes:
+      </h2>
+      <ul>
+        <li>rel="existing rel"</li>
+        <li>target="_self"</li>
+        <li>aria-label="Existing label"</li>
+        <li>class="external-link"</li>
+      </ul>
 
-    <h2 class="text-xl font-bold">Links that should have no properties</h2>
+      <div>
+        <h3 class="font-bold">External links with existing attributes</h3>
+        <a
+          href="https://external.com"
+          target="_self"
+          aria-label="existing label"
+          rel="existing rel"
+          class="existing-class"
+          >https://external.com</a
+        >
+      </div>
 
-    <div>
-      <h3 class="font-bold">Internal links</h3>
-      <a href="/internal">/internal</a>
-    </div>
+      <div>
+        <h3 class="font-bold">PDF links with existing attributes</h3>
+        <a
+          href="https://example.com/test.pdf"
+          target="_self"
+          aria-label="existing label"
+          rel="existing rel"
+          class="existing-class"
+          >https://example.com/test.pdf</a
+        >
+      </div>
 
-    <div>
-      <h3 class="font-bold">PDF links that match the current domain</h3>
-      <a id="local" href="">http://localhost:5173/test.pdf</a>
-    </div>
+      <h2 class="text-xl font-bold">Links that should have no properties</h2>
 
-    <h2 class="text-xl font-bold">
-      Same-site links (declared domain: example.com — no external attributes)
-    </h2>
-    <p class="text-sm text-slate-600">
-      When ExternalLinks is initialised with <code>domain: 'example.com'</code>,
-      these links are treated as same-site and do not get target="_blank" or the
-      external-link class.
-    </p>
-    <div>
-      <h3 class="font-bold">www variant</h3>
-      <a href="https://www.example.com">https://www.example.com</a>
-    </div>
-    <div>
-      <h3 class="font-bold">Subdomain</h3>
-      <a href="https://app.example.com">https://app.example.com</a>
-    </div>
-    <div>
-      <h3 class="font-bold">www + subdomain</h3>
-      <a href="https://www.app.example.com">https://www.app.example.com</a>
-    </div>
-    <div>
-      <h3 class="font-bold">Same-site PDF (example.com)</h3>
-      <a href="https://example.com/test.pdf">https://example.com/test.pdf</a>
-    </div>
+      <div>
+        <h3 class="font-bold">Internal links</h3>
+        <a href="/internal">/internal</a>
+      </div>
+
+      <div>
+        <h3 class="font-bold">Absolute links to the current host</h3>
+        <a class="current-host" data-path="/page" href="">/page</a>
+      </div>
+
+      <h2 class="text-xl font-bold">PDFs open in a new tab, even on the same site</h2>
+
+      <div>
+        <h3 class="font-bold">PDF links that match the current domain</h3>
+        <a class="current-host" data-path="/test.pdf" href="">/test.pdf</a>
+      </div>
+    </section>
+
+    <hr class="w-1/2 border-slate-400" />
+
+    <section id="declared" class="flex flex-col items-center space-y-4">
+      <h2 class="text-xl font-bold">Declared domain</h2>
+      <p class="text-sm text-slate-600 max-w-xl">
+        Initialised with <code>domain: 'example.com'</code>, as a site would be
+        when viewed on staging or locally. Links to example.com, its www version
+        and its subdomains are the same site. The current host still counts as
+        the same site.
+      </p>
+
+      <h2 class="text-xl font-bold">Same site (same tab)</h2>
+      <div>
+        <h3 class="font-bold">Bare domain</h3>
+        <a href="https://example.com">https://example.com</a>
+      </div>
+      <div>
+        <h3 class="font-bold">www variant</h3>
+        <a href="https://www.example.com">https://www.example.com</a>
+      </div>
+      <div>
+        <h3 class="font-bold">Subdomain</h3>
+        <a href="https://app.example.com">https://app.example.com</a>
+      </div>
+      <div>
+        <h3 class="font-bold">www + subdomain</h3>
+        <a href="https://www.app.example.com">https://www.app.example.com</a>
+      </div>
+      <div>
+        <h3 class="font-bold">Mixed case</h3>
+        <a href="https://APP.Example.com">https://APP.Example.com</a>
+      </div>
+      <div>
+        <h3 class="font-bold">Internal and current host links</h3>
+        <a href="/internal">/internal</a><br />
+        <a class="current-host" data-path="/page" href="">/page</a>
+      </div>
+
+      <h2 class="text-xl font-bold">Still external (new tab)</h2>
+      <div>
+        <h3 class="font-bold">Unrelated site</h3>
+        <a href="https://external.com">https://external.com</a>
+      </div>
+      <div>
+        <h3 class="font-bold">Lookalike domains</h3>
+        <a href="https://otherexample.com">https://otherexample.com</a><br />
+        <a href="https://wwwexample.com">https://wwwexample.com</a><br />
+        <a href="https://example.com.evil.com">https://example.com.evil.com</a>
+      </div>
+      <div>
+        <h3 class="font-bold">Same-site PDF (PDFs always open in a new tab)</h3>
+        <a href="https://example.com/test.pdf">https://example.com/test.pdf</a>
+      </div>
+    </section>
 
     <script>
-      // Used to update href of current domain link
-      document.getElementById(
-        'local'
-      ).href = `${window.location.origin}/test.pdf`;
+      // Point current host links at wherever the demo is running
+      document.querySelectorAll('.current-host').forEach((link) => {
+        link.href = `${window.location.origin}${link.dataset.path}`;
+        link.textContent = link.href;
+      });
     </script>
     <script type="module">
       import { ExternalLinks } from './lib/external-links.ts';
-      new ExternalLinks(document.querySelectorAll('a'), {
+
+      new ExternalLinks(document.querySelectorAll('#default a'));
+
+      new ExternalLinks(document.querySelectorAll('#declared a'), {
         domain: 'example.com',
       });
     </script>
