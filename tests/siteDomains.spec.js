@@ -7,6 +7,8 @@
  * - the intended change for sites served from www (FEF-240)
  * - the optional `domain` setting
  *
+ * All domains use the reserved .test top-level domain (RFC 2606).
+ *
  * @see {@link ../test-setup.js} for test configuration
  *
  * @example
@@ -43,40 +45,40 @@ describe('Site domain behaviour', () => {
   describe('unchanged from 1.6.0', () => {
     it.each([
       // Site on a bare domain
-      ['https://example.com', '/internal', undefined, false],
-      ['https://example.com', '#top', undefined, false],
-      ['https://example.com', 'mailto:hello@example.com', undefined, false],
-      ['https://example.com', 'tel:01234567890', undefined, false],
-      ['https://example.com', 'https://example.com/page', undefined, false],
-      ['https://example.com', 'https://EXAMPLE.com/page', undefined, false],
-      ['https://example.com', 'https://www.example.com/page', undefined, false],
-      ['https://example.com', 'https://sub.example.com', undefined, false],
-      ['https://example.com', 'https://www.sub.example.com', undefined, false],
-      ['https://example.com', 'https://external.com', undefined, true],
-      ['https://example.com', 'https://otherexample.com', undefined, true],
-      ['https://example.com', 'https://example.com.evil.com', undefined, true],
-      ['https://example.com', 'https://wwwexample.com', undefined, true],
-      ['https://example.com', '/doc.pdf', undefined, true],
-      ['https://example.com', 'https://external.com/doc.pdf', undefined, true],
-      ['https://example.com', '/doc.pdf', { openPDFNewTab: false }, false],
-      ['https://example.com', 'https://external.com/doc.pdf', { openPDFNewTab: false }, true],
-      ['https://example.com', 'https://external.com', null, true],
-      ['https://example.com', 'https://sub.example.com', {}, false],
+      ['https://site.test', '/internal', undefined, false],
+      ['https://site.test', '#top', undefined, false],
+      ['https://site.test', 'mailto:hello@site.test', undefined, false],
+      ['https://site.test', 'tel:01234567890', undefined, false],
+      ['https://site.test', 'https://site.test/page', undefined, false],
+      ['https://site.test', 'https://SITE.test/page', undefined, false],
+      ['https://site.test', 'https://www.site.test/page', undefined, false],
+      ['https://site.test', 'https://sub.site.test', undefined, false],
+      ['https://site.test', 'https://www.sub.site.test', undefined, false],
+      ['https://site.test', 'https://external.test', undefined, true],
+      ['https://site.test', 'https://othersite.test', undefined, true],
+      ['https://site.test', 'https://site.test.attacker.test', undefined, true],
+      ['https://site.test', 'https://wwwsite.test', undefined, true],
+      ['https://site.test', '/doc.pdf', undefined, true],
+      ['https://site.test', 'https://external.test/doc.pdf', undefined, true],
+      ['https://site.test', '/doc.pdf', { openPDFNewTab: false }, false],
+      ['https://site.test', 'https://external.test/doc.pdf', { openPDFNewTab: false }, true],
+      ['https://site.test', 'https://external.test', null, true],
+      ['https://site.test', 'https://sub.site.test', {}, false],
       // Site served from www: own host and unrelated sites
-      ['https://www.example.com', '/internal', undefined, false],
-      ['https://www.example.com', 'https://www.example.com/page', undefined, false],
-      ['https://www.example.com', 'https://external.com', undefined, true],
-      ['https://www.example.com', 'https://www.external.com', undefined, true],
-      ['https://www.example.com', 'https://otherexample.com', undefined, true],
-      ['https://www.example.com', 'https://example.com.evil.com', undefined, true],
-      ['https://www.example.com', 'https://wwwexample.com', undefined, true],
+      ['https://www.site.test', '/internal', undefined, false],
+      ['https://www.site.test', 'https://www.site.test/page', undefined, false],
+      ['https://www.site.test', 'https://external.test', undefined, true],
+      ['https://www.site.test', 'https://www.external.test', undefined, true],
+      ['https://www.site.test', 'https://othersite.test', undefined, true],
+      ['https://www.site.test', 'https://site.test.attacker.test', undefined, true],
+      ['https://www.site.test', 'https://wwwsite.test', undefined, true],
       // Site on a subdomain: the parent domain is still external
-      ['https://www.sub.example.com', 'https://example.com', undefined, true],
-      ['https://sub.example.com', 'https://example.com', undefined, true],
+      ['https://www.sub.site.test', 'https://site.test', undefined, true],
+      ['https://sub.site.test', 'https://site.test', undefined, true],
       // Local development
       ['http://localhost:5173', '/internal', undefined, false],
       ['http://localhost:5173', 'http://localhost:5173/page', undefined, false],
-      ['http://localhost:5173', 'https://example.com', undefined, true],
+      ['http://localhost:5173', 'https://site.test', undefined, true],
     ])('on %s, %s (options: %o) opens in new tab: %s', (site, href, options, expected) => {
       expect(opensInNewTab(site, href, options)).toBe(expected);
     });
@@ -84,25 +86,25 @@ describe('Site domain behaviour', () => {
 
   describe('sites served from www treat the bare domain and its subdomains as the same site (FEF-240)', () => {
     it.each([
-      ['https://www.example.com', 'https://example.com/page'],
-      ['https://www.example.com', 'https://EXAMPLE.com/page'],
-      ['https://www.example.com', 'https://sub.example.com'],
-      ['https://www.example.com', 'https://www.sub.example.com'],
-      ['https://www.example.com', 'https://deep.sub.example.com'],
-      ['https://www.sub.example.com', 'https://sub.example.com'],
-      ['https://www.sub.example.com', 'https://deep.sub.example.com'],
+      ['https://www.site.test', 'https://site.test/page'],
+      ['https://www.site.test', 'https://SITE.test/page'],
+      ['https://www.site.test', 'https://sub.site.test'],
+      ['https://www.site.test', 'https://www.sub.site.test'],
+      ['https://www.site.test', 'https://deep.sub.site.test'],
+      ['https://www.sub.site.test', 'https://sub.site.test'],
+      ['https://www.sub.site.test', 'https://deep.sub.site.test'],
     ])('on %s, %s opens in the same tab', (site, href) => {
       expect(opensInNewTab(site, href)).toBe(false);
     });
 
     describe('sites on a shared parent domain only match their own subdomains', () => {
       it.each([
-        ['https://leedsth.nhs.uk', false],
-        ['https://careers.leedsth.nhs.uk', false],
-        ['https://www.nhs.uk', true],
-        ['https://www.gosh.nhs.uk', true],
-      ])('on https://www.leedsth.nhs.uk, %s opens in new tab: %s', (href, expected) => {
-        expect(opensInNewTab('https://www.leedsth.nhs.uk', href)).toBe(expected);
+        ['https://member.parent.test', false],
+        ['https://careers.member.parent.test', false],
+        ['https://www.parent.test', true],
+        ['https://www.other-member.parent.test', true],
+      ])('on https://www.member.parent.test, %s opens in new tab: %s', (href, expected) => {
+        expect(opensInNewTab('https://www.member.parent.test', href)).toBe(expected);
       });
     });
   });
@@ -110,44 +112,44 @@ describe('Site domain behaviour', () => {
   describe('declared domain option', () => {
     describe('on a site not served from the declared domain (e.g. local or staging)', () => {
       it.each([
-        ['https://example.com', false],
-        ['https://www.example.com', false],
-        ['https://app.example.com', false],
-        ['https://www.app.example.com', false],
-        ['https://example.com/doc.pdf', true],
-        ['https://external.com', true],
-        ['https://otherexample.com', true],
-        ['https://example.com.evil.com', true],
+        ['https://site.test', false],
+        ['https://www.site.test', false],
+        ['https://app.site.test', false],
+        ['https://www.app.site.test', false],
+        ['https://site.test/doc.pdf', true],
+        ['https://external.test', true],
+        ['https://othersite.test', true],
+        ['https://site.test.attacker.test', true],
         ['/internal', false],
         ['http://localhost:5173/page', false],
-      ])('on http://localhost:5173 with domain example.com, %s opens in new tab: %s', (href, expected) => {
-        expect(opensInNewTab('http://localhost:5173', href, { domain: 'example.com' })).toBe(expected);
+      ])('on http://localhost:5173 with domain site.test, %s opens in new tab: %s', (href, expected) => {
+        expect(opensInNewTab('http://localhost:5173', href, { domain: 'site.test' })).toBe(expected);
       });
     });
 
-    it.each(['www.example.com', 'WWW.Example.COM', '  example.com  '])(
+    it.each(['www.site.test', 'WWW.Site.TEST', '  site.test  '])(
       'normalises the declared domain %j',
       (domain) => {
-        expect(opensInNewTab('http://localhost:5173', 'https://app.example.com', { domain })).toBe(false);
-        expect(opensInNewTab('http://localhost:5173', 'https://external.com', { domain })).toBe(true);
+        expect(opensInNewTab('http://localhost:5173', 'https://app.site.test', { domain })).toBe(false);
+        expect(opensInNewTab('http://localhost:5173', 'https://external.test', { domain })).toBe(true);
       }
     );
 
     it('falls back to the current host when the declared domain is empty', () => {
-      expect(opensInNewTab('https://example.com', 'https://sub.example.com', { domain: '' })).toBe(false);
-      expect(opensInNewTab('https://example.com', 'https://external.com', { domain: '' })).toBe(true);
+      expect(opensInNewTab('https://site.test', 'https://sub.site.test', { domain: '' })).toBe(false);
+      expect(opensInNewTab('https://site.test', 'https://external.test', { domain: '' })).toBe(true);
     });
 
     it('replaces the current host for subdomain matching, but links to the current host stay internal', () => {
-      const options = { domain: 'example.com' };
-      expect(opensInNewTab('https://staging.numiko.dev', 'https://staging.numiko.dev/page', options)).toBe(false);
-      expect(opensInNewTab('https://staging.numiko.dev', '/page', options)).toBe(false);
-      expect(opensInNewTab('https://staging.numiko.dev', 'https://assets.staging.numiko.dev', options)).toBe(true);
+      const options = { domain: 'site.test' };
+      expect(opensInNewTab('https://staging.agency.test', 'https://staging.agency.test/page', options)).toBe(false);
+      expect(opensInNewTab('https://staging.agency.test', '/page', options)).toBe(false);
+      expect(opensInNewTab('https://staging.agency.test', 'https://assets.staging.agency.test', options)).toBe(true);
     });
 
     it('adds the same attributes to external links as without the option', () => {
-      const withDomain = runOnSite('https://www.example.com', 'https://external.com', { domain: 'example.com' });
-      const withoutDomain = runOnSite('https://www.example.com', 'https://external.com');
+      const withDomain = runOnSite('https://www.site.test', 'https://external.test', { domain: 'site.test' });
+      const withoutDomain = runOnSite('https://www.site.test', 'https://external.test');
       for (const attribute of ['target', 'rel', 'aria-label', 'class']) {
         expect(withDomain.getAttribute(attribute)).toBe(withoutDomain.getAttribute(attribute));
       }

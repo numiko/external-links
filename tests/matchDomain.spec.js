@@ -34,7 +34,7 @@ describe('matchDomain Function', () => {
   });
 
   it('returns false when domain does not match', () => {
-    const { matches } = setupTest('https://other.com', 'example.com');
+    const { matches } = setupTest('https://other.test', 'example.com');
     expect(matches).toBe(false);
   });
 
@@ -49,7 +49,7 @@ describe('matchDomain Function', () => {
   });
 
   it('returns false when domain is a substring of another domain', () => {
-    const { matches } = setupTest('https://otherexample.com', 'example.com');
+    const { matches } = setupTest('https://otherexample.test', 'example.test');
     expect(matches).toBe(false);
   });
 
@@ -100,7 +100,7 @@ describe('matchDomain Function', () => {
     });
 
     it('returns true for domain.sub.com pattern when domain is declared', () => {
-      const { matches } = setupTest('https://example.org.uk', 'example.org.uk');
+      const { matches } = setupTest('https://example.ac.test', 'example.ac.test');
       expect(matches).toBe(true);
     });
   });

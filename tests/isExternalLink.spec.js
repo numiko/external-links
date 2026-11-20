@@ -27,7 +27,7 @@ describe('isExternalLink Function', () => {
   };
 
   it('returns true for external links', () => {
-    const isExternal = setupTest('https://external.com');
+    const isExternal = setupTest('https://external.test');
     expect(isExternal).toBe(true);
   });
 
@@ -42,7 +42,7 @@ describe('isExternalLink Function', () => {
   });
 
   it('returns false for links with non-http protocols', () => {
-    const isExternal = setupTest('ftp://external.com');
+    const isExternal = setupTest('ftp://external.test');
     expect(isExternal).toBe(false);
   });
 

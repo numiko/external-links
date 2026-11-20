@@ -48,7 +48,7 @@ Links are treated as the same site, and left alone, when they point to:
 - the site's domain, with or without `www`
 - any subdomain of the site's domain
 
-The site's domain is the `domain` option if set, otherwise the current host without `www`. For example, on `www.example.com` links to `example.com`, `app.example.com` and `www.app.example.com` open in the same tab, while links to `otherexample.com` open in a new tab.
+The site's domain is the `domain` option if set, otherwise the current host without `www`. For example, on `www.example.com` links to `example.com`, `app.example.com` and `www.app.example.com` open in the same tab, while links to other domains, such as `example.org`, open in a new tab.
 
 ## API
 

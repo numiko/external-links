@@ -52,12 +52,12 @@
 
       <div>
         <h3 class="font-bold">External links</h3>
-        <a href="https://external.com">https://external.com</a>
+        <a href="https://external.test">https://external.test</a>
       </div>
 
       <div>
         <h3 class="font-bold">External PDF Links</h3>
-        <a href="https://external.com/test.pdf">https://external.com/test.pdf</a>
+        <a href="https://external.test/test.pdf">https://external.test/test.pdf</a>
       </div>
 
       <div>
@@ -65,8 +65,8 @@
           Another site's domain and subdomains (no <code>domain</code> option, so
           matched against the current host)
         </h3>
-        <a href="https://www.example.com">https://www.example.com</a><br />
-        <a href="https://app.example.com">https://app.example.com</a>
+        <a href="https://www.site.test">https://www.site.test</a><br />
+        <a href="https://app.site.test">https://app.site.test</a>
       </div>
 
       <h2 class="text-xl font-bold">
@@ -82,12 +82,12 @@
       <div>
         <h3 class="font-bold">External links with existing attributes</h3>
         <a
-          href="https://external.com"
+          href="https://external.test"
           target="_self"
           aria-label="existing label"
           rel="existing rel"
           class="existing-class"
-          >https://external.com</a
+          >https://external.test</a
         >
       </div>
 
@@ -128,8 +128,8 @@
     <section id="declared" class="flex flex-col items-center space-y-4">
       <h2 class="text-xl font-bold">Declared domain</h2>
       <p class="text-sm text-slate-600 max-w-xl">
-        Initialised with <code>domain: 'example.com'</code>, as a site would be
-        when viewed on staging or locally. Links to example.com, its www version
+        Initialised with <code>domain: 'site.test'</code>, as a site would be
+        when viewed on staging or locally. Links to site.test, its www version
         and its subdomains are the same site. The current host still counts as
         the same site.
       </p>
@@ -137,23 +137,23 @@
       <h2 class="text-xl font-bold">Same site (same tab)</h2>
       <div>
         <h3 class="font-bold">Bare domain</h3>
-        <a href="https://example.com">https://example.com</a>
+        <a href="https://site.test">https://site.test</a>
       </div>
       <div>
         <h3 class="font-bold">www variant</h3>
-        <a href="https://www.example.com">https://www.example.com</a>
+        <a href="https://www.site.test">https://www.site.test</a>
       </div>
       <div>
         <h3 class="font-bold">Subdomain</h3>
-        <a href="https://app.example.com">https://app.example.com</a>
+        <a href="https://app.site.test">https://app.site.test</a>
       </div>
       <div>
         <h3 class="font-bold">www + subdomain</h3>
-        <a href="https://www.app.example.com">https://www.app.example.com</a>
+        <a href="https://www.app.site.test">https://www.app.site.test</a>
       </div>
       <div>
         <h3 class="font-bold">Mixed case</h3>
-        <a href="https://APP.Example.com">https://APP.Example.com</a>
+        <a href="https://APP.Site.TEST">https://APP.Site.TEST</a>
       </div>
       <div>
         <h3 class="font-bold">Internal and current host links</h3>
@@ -164,17 +164,17 @@
       <h2 class="text-xl font-bold">Still external (new tab)</h2>
       <div>
         <h3 class="font-bold">Unrelated site</h3>
-        <a href="https://external.com">https://external.com</a>
+        <a href="https://external.test">https://external.test</a>
       </div>
       <div>
         <h3 class="font-bold">Lookalike domains</h3>
-        <a href="https://otherexample.com">https://otherexample.com</a><br />
-        <a href="https://wwwexample.com">https://wwwexample.com</a><br />
-        <a href="https://example.com.evil.com">https://example.com.evil.com</a>
+        <a href="https://othersite.test">https://othersite.test</a><br />
+        <a href="https://wwwsite.test">https://wwwsite.test</a><br />
+        <a href="https://site.test.attacker.test">https://site.test.attacker.test</a>
       </div>
       <div>
         <h3 class="font-bold">Same-site PDF (PDFs always open in a new tab)</h3>
-        <a href="https://example.com/test.pdf">https://example.com/test.pdf</a>
+        <a href="https://site.test/test.pdf">https://site.test/test.pdf</a>
       </div>
     </section>
 
@@ -191,7 +191,7 @@
       new ExternalLinks(document.querySelectorAll('#default a'));
 
       new ExternalLinks(document.querySelectorAll('#declared a'), {
-        domain: 'example.com',
+        domain: 'site.test',
       });
     </script>
   </body>
