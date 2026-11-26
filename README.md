@@ -52,4 +52,4 @@ The site's domain is the `domain` option if set, otherwise the current host with
 
 ## API
 
-See [documentation](https://v1-7-0--numiko-external-links.netlify.app/) for more detail on how to use the package.
+See [documentation](https://v1-8-0--numiko-external-links.netlify.app/) for more detail on how to use the package.
