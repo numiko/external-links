@@ -17,17 +17,17 @@ beforeEach(() => {
   document.body.innerHTML = '';
 });
 
-const setupTest = (html, classList = null) => {
+const setupTest = (html, classList = null, options = {}) => {
   document.body.innerHTML = html;
   const tags = document.querySelectorAll('a');
-  const options = classList ? { classList } : {};
-  new ExternalLinks(tags, options);
+  const opts = classList ? { ...options, classList } : options;
+  new ExternalLinks(tags, opts);
   return tags[0];
 };
 
 describe('addAttributesToLinks Function', () => {
   describe('External links', () => {
-    const link = setupTest('<a href="https://external.com">External Link</a>');
+    const link = setupTest('<a href="https://external.test">External Link</a>');
 
     it('adds target attribute', () => {
       expect(link.getAttribute('target')).toBe('_blank');
@@ -66,7 +66,7 @@ describe('addAttributesToLinks Function', () => {
       return tags[0];
     };
 
-    const link = setupTestWithIcon('<a href="https://external.com">External Link</a>');
+    const link = setupTestWithIcon('<a href="https://external.test">External Link</a>');
 
     it('adds icon', () => {
       expect(link.querySelector('svg')).toBeTruthy();
@@ -74,7 +74,7 @@ describe('addAttributesToLinks Function', () => {
   });
 
   describe('External links with custom classes', () => {
-    const link = setupTest('<a href="https://external.com">External Link</a>', ['optionClass', 'optionClass2']);
+    const link = setupTest('<a href="https://external.test">External Link</a>', ['optionClass', 'optionClass2']);
 
     it('adds custom classes from options', () => {
       expect(link.classList.contains('optionClass')).toBe(true);
@@ -88,7 +88,7 @@ describe('addAttributesToLinks Function', () => {
 
   describe('External PDF links with no options passed', () => {
     const link = setupTest(
-      '<a href="https://external.com/test.pdf">PDF Link</a>'
+      '<a href="https://external.test/test.pdf">PDF Link</a>'
     );
 
     it('adds target attribute', () => {
@@ -116,7 +116,7 @@ describe('addAttributesToLinks Function', () => {
 
   describe('External links with existing attributes', () => {
     const link = setupTest(
-      '<a href="https://external.com" target="_self" aria-label="Existing label" rel="existing rel" class="existing-class">Link</a>'
+      '<a href="https://external.test" target="_self" aria-label="Existing label" rel="existing rel" class="existing-class">Link</a>'
     );
 
     it('does not change existing target attribute', () => {
@@ -138,7 +138,7 @@ describe('addAttributesToLinks Function', () => {
 
   describe('External links with existing classes', () => {
     const link = setupTest(
-      '<a href="https://external.com" class="existing-class">Link</a>',
+      '<a href="https://external.test" class="existing-class">Link</a>',
       ['optionClass', 'optionClass2']
     );
 
@@ -181,6 +181,26 @@ describe('addAttributesToLinks Function', () => {
       expect(link.classList.contains('existing-class')).toBe(true);
       expect(link.classList.contains('optionClass')).toBe(true);
       expect(link.classList.contains('optionClass2')).toBe(true);
+    });
+  });
+
+  describe('Internal links (same site via declared domain)', () => {
+    it('treats www as same site when domain is declared without www', () => {
+      const link = setupTest('<a href="https://www.example.com">Same site via www</a>', null, { domain: 'example.com' });
+      expect(link.getAttribute('target')).toBe(null);
+      expect(link.classList.contains('external-link')).toBe(false);
+    });
+
+    it('treats subdomain as same site when domain is declared', () => {
+      const link = setupTest('<a href="https://app.example.com">Same site subdomain</a>', null, { domain: 'example.com' });
+      expect(link.getAttribute('target')).toBe(null);
+      expect(link.classList.contains('external-link')).toBe(false);
+    });
+
+    it('treats www.sub as same site when domain is declared', () => {
+      const link = setupTest('<a href="https://www.app.example.com">Same site www subdomain</a>', null, { domain: 'example.com' });
+      expect(link.getAttribute('target')).toBe(null);
+      expect(link.classList.contains('external-link')).toBe(false);
     });
   });
 
@@ -233,7 +253,7 @@ describe('addAttributesToLinks Function', () => {
   describe('Aria-label attribute', () => {
     it('does not include HTML comments in aria-label', () => {
       const link = setupTest(`
-        <a href="https://external.com">
+        <a href="https://external.test">
           <span></span>
           <img src="image.jpg" alt="Image description" />
           <!-- comment --> Link with comment <!-- comment -->
@@ -245,7 +265,7 @@ describe('addAttributesToLinks Function', () => {
     it('ignores content inside <noscript>', () => {
       const link = setupTest(`
           <!-- This is a comment within a noscript element -->
-          <a href="https://external.com">
+          <a href="https://external.test">
             <noscript>
               <!-- This is a comment within a noscript element -->
             </noscript>
