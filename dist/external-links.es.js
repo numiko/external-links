@@ -1,12 +1,16 @@
 // lib/external-links.ts
 var e = class {
 	constructor(e = [], t = {}) {
-		this.options = {
+		if (this.baseDomain = null, this.options = {
 			openPDFNewTab: !0,
 			classList: ["external-link"],
 			icon: null,
-			...t
-		}, this.links = e, this.addAttributesToLinks(this.links);
+			...t ?? {}
+		}, this.options.domain != null && this.options.domain !== "") {
+			let e = this.options.domain.toLowerCase().trim();
+			this.baseDomain = e.startsWith("www.") ? e.slice(4) : e;
+		}
+		this.links = e, this.addAttributesToLinks(this.links);
 	}
 	addAttributesToLinks(e) {
 		for (let t of e) {
@@ -26,14 +30,15 @@ var e = class {
 	isExternalLink(e) {
 		return (e.protocol === "https:" || e.protocol === "http:") && location.hostname !== e.hostname && e.hostname.length > 0 && e.hostname.slice(0, 1) !== "/";
 	}
-	matchDomain(e, t = window.location.host) {
+	matchDomain(e, t) {
 		let n;
 		try {
-			n = new URL(e).host;
+			n = new URL(e).host.toLowerCase();
 		} catch {
 			return !1;
 		}
-		return n.toLowerCase() === t.toLowerCase() || n.toLowerCase().endsWith("." + t.toLowerCase());
+		let r = (t ?? this.baseDomain ?? window.location.host).toLowerCase(), i = r.startsWith("www.") ? r.slice(4) : r, a = n.startsWith("www.") ? n.slice(4) : n;
+		return a === i || a.endsWith("." + i);
 	}
 };
 export { e as ExternalLinks };
